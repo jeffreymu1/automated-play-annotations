@@ -1,1 +1,1 @@
-"""pixelplayers — automatic sports game annotation."""
+"""automatic sports game annotation."""
