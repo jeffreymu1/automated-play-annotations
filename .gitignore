@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+
+# UV
+uv.lock
+
+# Models / data (large files)
+models/*.pt
+models/*.pth
+models/*.onnx
+data/*
+!data/.gitkeep
+
+# Results
+results/*
+!results/.gitkeep
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
