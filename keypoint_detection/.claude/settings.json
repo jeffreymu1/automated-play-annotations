@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv pip *)",
+      "Bash(.venv/bin/python court_overlay.py --save /tmp/court_overlay_test.png)",
+      "Bash(uv sync *)",
+      "Bash(VIRTUAL_ENV=/home/oras/codes/brown_cs/cs1430/final_project/.venv uv pip list)",
+      "Bash(python court_overlay.py --idx 0 --save /tmp/overlay0.png)",
+      "Bash(python court_overlay.py --idx 50 --save /tmp/overlay50.png)",
+      "Bash(python court_overlay.py --idx 309 --save /tmp/overlay309.png)"
+    ]
+  }
+}
