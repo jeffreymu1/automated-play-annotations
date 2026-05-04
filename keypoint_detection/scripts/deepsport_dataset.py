@@ -1,21 +1,3 @@
-"""PyTorch-style dataset over the DeepSport court-frames.
-
-Walks a flat list of ``<set>/<game>/camcourtN_<ts>_0.png`` images under
-a dataset root (default ``data/deepsport-dataset``) and yields, per
-frame:
-
-    X      -- grayscale image, torch.Tensor of shape (1, H, W), float32, [0, 1].
-    y      -- dict of 6 keypoints (4 court corners + 2 half-court
-              endpoints); each value is (u, v) in image pixels or None
-              if the keypoint projects behind the camera or outside the
-              image rectangle.
-    calib  -- CameraCalibration for the frame (needed by tooling that
-              still wants to sample lens-distorted curves).
-
-Sets collapse into one flat index range; callers don't need to know
-which set an index belongs to.
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -69,9 +51,7 @@ class DeepSportDataset(Dataset):
         y: Keypoints = {}
         for name, uv in zip(KEYPOINT_NAMES, uvs):
             u, v = float(uv[0]), float(uv[1])
-            if (np.isfinite(uv).all()
-                    and 0.0 <= u < calib.width
-                    and 0.0 <= v < calib.height):
+            if np.isfinite(uv).all() and 0.0 <= u < calib.width and 0.0 <= v < calib.height:
                 y[name] = (u, v)
             else:
                 y[name] = None
@@ -80,7 +60,7 @@ class DeepSportDataset(Dataset):
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description="Inspect DeepSportDataset sample")
     parser.add_argument("--root", type=Path, default=Path("data/deepsport-dataset"))
     parser.add_argument("--idx", type=int, default=0)
     args = parser.parse_args()
@@ -89,8 +69,10 @@ def main() -> None:
     print(f"len(dataset) = {len(dataset)}")
 
     X, y, calib = dataset[args.idx]
-    print(f"X.shape = {tuple(X.shape)}   dtype = {X.dtype}   "
-          f"min = {X.min().item():.3f}   max = {X.max().item():.3f}")
+    print(
+        f"X.shape = {tuple(X.shape)}   dtype = {X.dtype}   "
+        f"min = {X.min().item():.3f}   max = {X.max().item():.3f}"
+    )
     print(f"image size (calib): {calib.width} x {calib.height}")
     print("y:")
     for name, uv in y.items():

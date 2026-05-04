@@ -12,12 +12,14 @@ uv.lock
 models/*.pt
 models/*.pth
 models/*.onnx
-data/*
-!data/.gitkeep
+/data/
 
 # Results
 results/*
 !results/.gitkeep
+
+runs/
+*.pt
 
 # Jupyter
 .ipynb_checkpoints/

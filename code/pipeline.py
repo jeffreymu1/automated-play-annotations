@@ -1,3 +1,4 @@
+from collections import defaultdict, deque
 from pathlib import Path
 
 import cv2
@@ -12,17 +13,36 @@ from .tracking import CentroidTracker
 from .visualize import draw_detections, save_field_plot
 
 
+def list_frame_paths(input_dir: Path) -> list[Path]:
+    exts = {".png", ".jpg", ".jpeg", ".webp"}
+    return sorted(p for p in input_dir.iterdir() if p.is_file() and p.suffix.lower() in exts)
+
+
 def run_pipeline(config: PipelineConfig, image_corners: list[tuple[float, float]]) -> None:
-    cap = cv2.VideoCapture(str(config.input_video))
-    if not cap.isOpened():
-        raise FileNotFoundError(f"Could not open video: {config.input_video}")
+    input_path = config.input_video
+    use_image_sequence = input_path.is_dir()
 
-    ok, first_frame = cap.read()
-    if not ok:
-        raise RuntimeError("Input video has no frames.")
-    cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+    cap: cv2.VideoCapture | None = None
+    paths: list[Path] = []
 
-    fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+    if use_image_sequence:
+        paths = list_frame_paths(input_path)
+        if not paths:
+            raise FileNotFoundError(f"No images (.png/.jpg/...) in directory: {input_path}")
+        first_frame = cv2.imread(str(paths[0]))
+        if first_frame is None:
+            raise RuntimeError(f"Could not read image: {paths[0]}")
+        fps = float(config.sequence_fps)
+    else:
+        cap = cv2.VideoCapture(str(input_path))
+        if not cap.isOpened():
+            raise FileNotFoundError(f"Could not open video: {input_path}")
+        ok, first_frame = cap.read()
+        if not ok:
+            cap.release()
+            raise RuntimeError("Input video has no frames.")
+        fps = float(cap.get(cv2.CAP_PROP_FPS) or 30.0)
+
     writer = video_writer_for(first_frame, config.output_video, fps)
 
     detector = YoloDetector(config.yolo_model, config.confidence, config.iou)
@@ -33,31 +53,56 @@ def run_pipeline(config: PipelineConfig, image_corners: list[tuple[float, float]
         config.field_height_m,
     )
 
-    projected_points: list[tuple[str, int, float, float]] = []
+    trajectories: dict[tuple[str, int], list[tuple[float, float]]] = defaultdict(list)
+    trail_len = max(2, config.trail_length)
+    image_trails: dict[int, deque[tuple[int, int]]] = defaultdict(lambda: deque(maxlen=trail_len))
+    track_class: dict[int, str] = {}
     frame_count = 0
     max_frames = config.max_frames
 
-    while True:
-        ok, frame = cap.read()
-        if not ok:
-            break
-        frame_count += 1
-        if max_frames is not None and frame_count > max_frames:
-            break
-
+    def process_frame(frame) -> None:
         detections = detector.detect(frame)
         tracks = tracker.update(detections)
-        annotated = draw_detections(frame.copy(), detections, tracks)
+        for tr in tracks:
+            track_class[tr.track_id] = tr.cls_name
+            ix, iy = int(tr.position[0]), int(tr.position[1])
+            image_trails[tr.track_id].append((ix, iy))
+            fx, fy = project_image_point_to_field(tr.position, homography)
+            trajectories[(tr.cls_name, tr.track_id)].append((fx, fy))
+
+        annotated = draw_detections(
+            frame.copy(),
+            detections,
+            tracks,
+            image_trails=image_trails,
+            track_class=track_class,
+        )
         writer.write(annotated)
 
-        for tr in tracks:
-            fx, fy = project_image_point_to_field(tr.position, homography)
-            projected_points.append((tr.cls_name, tr.track_id, fx, fy))
+    if use_image_sequence:
+        for p in paths:
+            frame = cv2.imread(str(p))
+            if frame is None:
+                continue
+            if max_frames is not None and frame_count >= max_frames:
+                break
+            process_frame(frame)
+            frame_count += 1
+    else:
+        assert cap is not None
+        while True:
+            ok, frame = cap.read()
+            if not ok:
+                break
+            if max_frames is not None and frame_count >= max_frames:
+                break
+            process_frame(frame)
+            frame_count += 1
+        cap.release()
 
-    cap.release()
     writer.release()
     save_field_plot(
-        projected_points,
+        dict(trajectories),
         config.output_plot,
         config.field_width_m,
         config.field_height_m,
@@ -68,7 +113,6 @@ def run_pipeline(config: PipelineConfig, image_corners: list[tuple[float, float]
 
 
 def default_corners_for_frame(frame_width: int, frame_height: int) -> list[tuple[float, float]]:
-    """Temporary default corners; replace with learned/automatic corner detector."""
     margin_x = max(20, int(0.08 * frame_width))
     margin_y = max(20, int(0.1 * frame_height))
     return [
@@ -79,12 +123,20 @@ def default_corners_for_frame(frame_width: int, frame_height: int) -> list[tuple
     ]
 
 
-def infer_default_corners(video_path: Path) -> list[tuple[float, float]]:
-    cap = cv2.VideoCapture(str(video_path))
-    ok, frame = cap.read()
-    cap.release()
-    if not ok:
-        raise RuntimeError(f"Could not read first frame of {video_path}")
+def infer_default_corners(input_path: Path) -> list[tuple[float, float]]:
+    if input_path.is_dir():
+        paths = list_frame_paths(input_path)
+        if not paths:
+            raise RuntimeError(f"No images in directory {input_path}")
+        frame = cv2.imread(str(paths[0]))
+        if frame is None:
+            raise RuntimeError(f"Could not read {paths[0]}")
+    else:
+        cap = cv2.VideoCapture(str(input_path))
+        ok, frame = cap.read()
+        cap.release()
+        if not ok:
+            raise RuntimeError(f"Could not read first frame of {input_path}")
     h, w = frame.shape[:2]
     return default_corners_for_frame(w, h)
 

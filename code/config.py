@@ -13,4 +13,6 @@ class PipelineConfig:
     confidence: float = 0.35
     iou: float = 0.5
     max_frames: int | None = None
+    trail_length: int = 48
+    sequence_fps: float = 24.0
 

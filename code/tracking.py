@@ -15,8 +15,6 @@ class TrackState:
 
 
 class CentroidTracker:
-    """Simple distance-based tracker for a baseline pipeline."""
-
     def __init__(self, max_distance: float = 45.0, max_stale: int = 20) -> None:
         self.max_distance = max_distance
         self.max_stale = max_stale

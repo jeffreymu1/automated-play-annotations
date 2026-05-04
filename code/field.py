@@ -15,10 +15,7 @@ def build_homography_from_corners(
     field_width_m: float,
     field_height_m: float,
 ) -> FieldHomography:
-    """Build a planar homography from 4 known image corners.
-
-    image_corners order: top-left, top-right, bottom-right, bottom-left
-    """
+    # image_corners: TL, TR, BR, BL
     if len(image_corners) != 4:
         raise ValueError("Exactly 4 corners required.")
 
@@ -36,4 +33,3 @@ def build_homography_from_corners(
     image_to_field = cv2.getPerspectiveTransform(src, dst)
     field_to_image = cv2.getPerspectiveTransform(dst, src)
     return FieldHomography(image_to_field=image_to_field, field_to_image=field_to_image)
-
