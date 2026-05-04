@@ -14,6 +14,7 @@ BATCH="${BATCH:-4}"
 IMGSZ="${IMGSZ:-1024}"
 EPOCHS="${EPOCHS:-120}"
 WORKERS="${WORKERS:-4}"
+COPY_IMAGES="${COPY_IMAGES:-0}"
 
 echo "=========================================="
 echo "Repo:      $ROOT"
@@ -31,7 +32,11 @@ fi
 if [[ "${SKIP_EXPORT:-0}" != "1" ]]; then
   echo ""
   echo "== [1/2] Export =="
-  uv run cs1430-export-yolo --data-root "$DATA_ROOT" --output "$YOLO_OUT"
+  EXP=(--data-root "$DATA_ROOT" --output "$YOLO_OUT")
+  if [[ "$COPY_IMAGES" == "1" ]]; then
+    EXP+=(--copy-images)
+  fi
+  uv run cs1430-export-yolo "${EXP[@]}"
 else
   echo "== [1/2] SKIP_EXPORT=1 → $YOLO_OUT =="
   if [[ ! -f "$YOLO_OUT/data.yaml" ]]; then
@@ -54,9 +59,10 @@ uv run cs1430-train-yolo \
   --patience 50 \
   --workers "$WORKERS" \
   --cos-lr \
+  --preset deepsport \
   --mixup 0.08 \
   --close-mosaic 20 \
   --cache off
 
 echo ""
-echo "Weights: runs/detect/results/train_runs/${RUN_NAME}/weights/best.pt"
+echo "Weights: $ROOT/results/train_runs/${RUN_NAME}/weights/best.pt"

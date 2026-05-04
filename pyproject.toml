@@ -37,6 +37,7 @@ dev = [
 [project.scripts]
 cs1430-export-yolo = "cs1430_runner.shim:export_yolo_main"
 cs1430-train-yolo = "cs1430_runner.shim:train_yolo_main"
+cs1430-val-yolo = "cs1430_runner.shim:val_yolo_main"
 cs1430-annotate = "cs1430_runner.shim:annotate_main"
 
 [build-system]

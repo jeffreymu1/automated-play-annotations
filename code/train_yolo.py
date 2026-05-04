@@ -2,6 +2,22 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from typing import Any
+
+# Ultralytics augmentation bundle tuned for arena basketball (lighting, mild camera motion).
+PRESET_DEEPSPORT: dict[str, Any] = {
+    "degrees": 5.0,
+    "translate": 0.1,
+    "scale": 0.55,
+    "shear": 1.0,
+    "perspective": 0.0,
+    "fliplr": 0.5,
+    "flipud": 0.0,
+    "hsv_h": 0.02,
+    "hsv_s": 0.55,
+    "hsv_v": 0.45,
+    "mosaic": 1.0,
+}
 
 
 def resolve_train_device(device_arg: str) -> str | int:
@@ -42,6 +58,13 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--close-mosaic", type=int, default=15)
     p.add_argument("--cache", choices=("off", "ram", "disk"), default="off")
     p.add_argument("--resume", action="store_true")
+    p.add_argument(
+        "--preset",
+        choices=("none", "deepsport"),
+        default="none",
+        help="Augmentation preset: 'deepsport' for arena lighting / mild warp; 'none' for Ultralytics defaults.",
+    )
+    p.add_argument("--rect", action="store_true", help="Rectangular training batches (often faster at high imgsz)")
     return p.parse_args()
 
 
@@ -56,10 +79,15 @@ def main() -> None:
     from ultralytics import YOLO
 
     device = resolve_train_device(args.device)
-    print(f"[train_yolo] Using device: {device}")
+    print(f"[train_yolo] Using device: {device}  preset={args.preset}")
 
     cache_map = {"off": False, "ram": "ram", "disk": "disk"}
     model = YOLO(args.model)
+
+    aug: dict[str, Any] = {}
+    if args.preset == "deepsport":
+        aug.update(PRESET_DEEPSPORT)
+
     model.train(
         data=str(data_yaml),
         epochs=args.epochs,
@@ -76,6 +104,8 @@ def main() -> None:
         mixup=args.mixup,
         close_mosaic=args.close_mosaic,
         cache=cache_map[args.cache],
+        rect=args.rect,
+        **aug,
     )
     trainer = getattr(model, "trainer", None)
     save_dir = getattr(trainer, "save_dir", None) if trainer else None

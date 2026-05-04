@@ -30,3 +30,10 @@ def train_yolo_main() -> None:
     from code.train_yolo import main
 
     main()
+
+
+def val_yolo_main() -> None:
+    _ensure_project_code_on_path()
+    from code.val_yolo import main
+
+    main()
