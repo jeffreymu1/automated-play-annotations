@@ -6,7 +6,7 @@ app = marimo.App(width="medium")
 
 @app.cell
 def _():
-    from deepsport_dataset import DeepSportDataset
+    from court_detection.dataset import DeepSportDataset
     import timm
 
     return DeepSportDataset, timm
