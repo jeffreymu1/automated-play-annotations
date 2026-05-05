@@ -1,3 +1,5 @@
+"""Render the basketball court boundary + keypoints onto a DeepSport frame."""
+
 from __future__ import annotations
 
 import argparse
@@ -7,10 +9,12 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-from court_geometry import (
+from court_detection.dataset import DeepSportDataset, keypoints_to_dict
+from court_detection.geometry import (
     COURT_LENGTH_CM,
     COURT_WIDTH_CM,
     CameraCalibration,
+    KEYPOINT_NAMES,
     court_corners_world,
     project_world_to_image,
     sample_segment,
@@ -28,14 +32,7 @@ def draw_polyline(
     if finite.sum() < 2:
         return
     pts = np.round(pts_uv[finite]).astype(np.int32).reshape(-1, 1, 2)
-    cv2.polylines(
-        image_bgr,
-        [pts],
-        isClosed=closed,
-        color=color,
-        thickness=thickness,
-        lineType=cv2.LINE_AA,
-    )
+    cv2.polylines(image_bgr, [pts], isClosed=closed, color=color, thickness=thickness, lineType=cv2.LINE_AA)
 
 
 KEYPOINT_COLORS = {
@@ -74,53 +71,44 @@ def draw_court_edges(
 
 def draw_keypoints(
     image_bgr: np.ndarray,
-    keypoints: dict[str, tuple[float, float] | None],
+    keypoints: dict[str, tuple[float, float] | None] | np.ndarray,
     radius: int = 8,
 ) -> None:
+    if not isinstance(keypoints, dict):
+        keypoints = keypoints_to_dict(keypoints)
     for name, uv in keypoints.items():
         if uv is None:
             continue
         color = KEYPOINT_COLORS.get(name, (255, 255, 255))
         u, v = int(round(uv[0])), int(round(uv[1]))
         cv2.circle(image_bgr, (u, v), radius, color, -1, lineType=cv2.LINE_AA)
-        cv2.putText(
-            image_bgr,
-            name,
-            (u + 10, v - 10),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            color,
-            2,
-            cv2.LINE_AA,
-        )
+        cv2.putText(image_bgr, name, (u + 10, v - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2, cv2.LINE_AA)
 
 
 def main() -> None:
-    from deepsport_dataset import DeepSportDataset
-
-    parser = argparse.ArgumentParser(description="Court overlay on one frame")
-    parser.add_argument("--idx", type=int, default=0)
-    parser.add_argument("--root", type=Path, default=Path("../data/deepsport-dataset"))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--idx", type=int, default=0, help="Flat frame index into the DeepSport dataset.")
+    parser.add_argument("--root", type=Path, default=Path("data/deepsport-dataset"))
     parser.add_argument("--save", type=Path, default=None)
     args = parser.parse_args()
 
     dataset = DeepSportDataset(args.root)
-    X, y, calib = dataset[args.idx]
+    image, keypoints, calib = dataset[args.idx]
 
     print(f"Frame {args.idx} / {len(dataset)}  ({calib.width} x {calib.height})")
     print("Keypoints (u, v):")
-    for name, uv in y.items():
-        if uv is None:
+    for name, row in zip(KEYPOINT_NAMES, keypoints):
+        if row[2].item() == 0:
             print(f"  {name}: None")
         else:
-            print(f"  {name}: ({uv[0]:.1f}, {uv[1]:.1f})")
+            print(f"  {name}: ({row[0].item():.1f}, {row[1].item():.1f}, v={int(row[2].item())})")
 
-    gray_u8 = (X.squeeze(0).numpy() * 255.0).clip(0, 255).astype(np.uint8)
-    image_bgr = cv2.cvtColor(gray_u8, cv2.COLOR_GRAY2BGR)
+    rgb_u8 = (image.permute(1, 2, 0).numpy() * 255.0).clip(0, 255).astype(np.uint8)
+    image_bgr = cv2.cvtColor(rgb_u8, cv2.COLOR_RGB2BGR)
 
     overlay = image_bgr.copy()
     draw_court_edges(overlay, calib)
-    draw_keypoints(overlay, y)
+    draw_keypoints(overlay, keypoints)
 
     if args.save:
         cv2.imwrite(str(args.save), overlay)

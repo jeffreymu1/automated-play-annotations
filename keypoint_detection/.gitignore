@@ -175,5 +175,11 @@ pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
 
-data/*
-results/
+__marimo__
+lightning_logs
+checkpoints
+results
+.codex
+data
+test_footage
+player_detection/output/
