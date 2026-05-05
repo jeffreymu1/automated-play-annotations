@@ -214,6 +214,7 @@ def run_pipeline(config: PipelineConfig) -> None:
             include_player_ids=selected_players,
             include_ball_id=include_ball_id,
             team_by_player_id=team_by_player_id,
+            arrow_scale=config.whiteboard_arrow_scale,
         )
         print(
             f"[cyan]Whiteboard drawn:[/cyan] {drawn_players} players "

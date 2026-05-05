@@ -204,6 +204,7 @@ def save_whiteboard_play(
     include_player_ids: set[int] | None = None,
     include_ball_id: int | None = None,
     team_by_player_id: dict[int, str] | None = None,
+    arrow_scale: float = 1.0,
 ) -> int:
     """Render a whiteboard-style half-sketched play image with court and players."""
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -253,6 +254,9 @@ def save_whiteboard_play(
         y0 = float(np.clip(y0, 0.0, field_height_m))
         x1 = float(np.clip(x1, 0.0, field_width_m))
         y1 = float(np.clip(y1, 0.0, field_height_m))
+        if arrow_scale != 1.0:
+            x1 = float(np.clip(x0 + (x1 - x0) * arrow_scale, 0.0, field_width_m))
+            y1 = float(np.clip(y0 + (y1 - y0) * arrow_scale, 0.0, field_height_m))
 
         if is_ball:
             # Optional: keep ball endpoint for context.

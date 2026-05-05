@@ -30,3 +30,4 @@ class PipelineConfig:
     output_whiteboard: Path | None = Path("results/play_whiteboard.png")
     whiteboard_arrows: bool = True
     whiteboard_max_players: int = 10
+    whiteboard_arrow_scale: float = 1.0

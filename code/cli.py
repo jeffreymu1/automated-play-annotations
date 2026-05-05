@@ -72,6 +72,12 @@ def parse_args() -> argparse.Namespace:
         default=10,
         help="Max player markers in whiteboard snapshot (default 10).",
     )
+    parser.add_argument(
+        "--whiteboard-arrow-scale",
+        type=float,
+        default=1.0,
+        help="Amplify whiteboard arrow length while keeping start positions fixed (e.g. 2.0).",
+    )
 
     return parser.parse_args()
 
@@ -109,6 +115,7 @@ def main() -> None:
         yolo_class_substrings=subs,
         whiteboard_arrows=not args.no_whiteboard_arrows,
         whiteboard_max_players=max(1, int(args.whiteboard_max_players)),
+        whiteboard_arrow_scale=max(0.1, float(args.whiteboard_arrow_scale)),
     )
     run_pipeline(cfg)
 
