@@ -1,5 +1,7 @@
-# CS1430 Final Project — Automatic Sports Game Annotation
+![Final report](report/poster.jpg)
 
+# PixelPlayers: Automated Whiteboard Basketball Annotations
+Basketball coaches and players rely heavily on game film to review opposing formations and develop counter-strategies, a process that typically involves manually scrubbing footage and sketching out plays on a whiteboard. While this workflow is central to how teams prepare, it can be time-intensive across a full season of film. Our goal is to augment this process by generating visual patterns or formations for coaches and players to work with. We present \textbf{PixelPlayers}, an end-to-end framework that derives basketball player and ball tracking instances through fine-tuned video supervision. The system produces annotated whiteboard-style play diagrams overlaid on footage, designed to serve as a starting point for game analysis.
 
 ## Setup
 
