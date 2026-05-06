@@ -53,9 +53,11 @@ class DeepSportDataset(Dataset):
         self,
         root: Path | str = Path("data/deepsport-dataset"),
         load_players: bool = False,
+        load_annotation_masks: bool = False,
     ) -> None:
         self.root = Path(root)
         self.load_players = load_players
+        self.load_annotation_masks = load_annotation_masks
         if not self.root.is_dir():
             raise FileNotFoundError(f"Dataset root not found: {self.root}")
 
@@ -121,6 +123,8 @@ class DeepSportDataset(Dataset):
     ) -> (
         tuple[torch.Tensor, Keypoints, CameraCalibration]
         | tuple[torch.Tensor, Keypoints, CameraCalibration, PlayerAnnotations]
+        | tuple[torch.Tensor, Keypoints, CameraCalibration, torch.Tensor]
+        | tuple[torch.Tensor, Keypoints, CameraCalibration, PlayerAnnotations, torch.Tensor]
     ):
         image_path, json_path = self.samples[idx]
         calib = CameraCalibration.from_json(json_path)
@@ -137,11 +141,32 @@ class DeepSportDataset(Dataset):
             if np.isfinite(uv).all() and 0.0 <= u < calib.width and 0.0 <= v < calib.height:
                 keypoints[i] = (u, v, 2.0)
 
-        if not self.load_players:
+        if not self.load_players and not self.load_annotation_masks:
             return image, torch.from_numpy(keypoints), calib
 
-        players = self._load_player_annotations(json_path, calib)
-        return image, torch.from_numpy(keypoints), calib, players
+        items: list[object] = [image, torch.from_numpy(keypoints), calib]
+        if self.load_players:
+            items.append(self._load_player_annotations(json_path, calib))
+        if self.load_annotation_masks:
+            mask = self.load_annotation_occlusion_mask(json_path)
+            if not mask.size:
+                mask = np.zeros((calib.height, calib.width), dtype=bool)
+            items.append(torch.from_numpy(mask))
+        return tuple(items)  # type: ignore[return-value]
+
+    @staticmethod
+    def load_annotation_occlusion_mask(json_path: Path) -> np.ndarray:
+        """Return True for annotated human or ball pixels in a DeepSport mask sidecar."""
+        mask_path = json_path.with_name(f"{json_path.stem}_humans.png")
+        if not mask_path.is_file():
+            return np.zeros((0, 0), dtype=bool)
+
+        mask = cv2.imread(str(mask_path), cv2.IMREAD_UNCHANGED)
+        if mask is None:
+            raise FileNotFoundError(f"Could not read annotation mask: {mask_path}")
+
+        class_ids = mask.astype(np.int64) // 1000
+        return np.isin(class_ids, (1, 3))
 
     def _load_player_annotations(self, json_path: Path, calib: CameraCalibration) -> PlayerAnnotations:
         boxes = self._load_player_boxes(json_path)

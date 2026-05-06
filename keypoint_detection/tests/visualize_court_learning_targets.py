@@ -53,6 +53,7 @@ def visualize(args: argparse.Namespace) -> None:
         augment=args.augment,
         line_names=FIBA_MARKING_NAMES,
         side_blur_sigma=args.side_blur_sigma,
+        use_player_occlusion=args.use_player_occlusion,
     )
 
     args.out.mkdir(parents=True, exist_ok=True)
@@ -67,9 +68,11 @@ def visualize(args: argparse.Namespace) -> None:
         side_target = sample["side_target"].numpy()
         side_weight = sample["side_weight"].numpy()
         court_mask = sample["court_mask"].numpy()
+        occlusion_mask = sample["annotation_occlusion_mask"].numpy()
+        lineness_weight = sample["lineness_weight"].numpy()
         class_onehot = _onehot(class_target, len(FIBA_MARKING_NAMES))
 
-        fig, axes = plt.subplots(2, 2, figsize=(10, 7.5), constrained_layout=True)
+        fig, axes = plt.subplots(2, 4, figsize=(17, 7.5), constrained_layout=True)
 
         ax = axes[0, 0]
         ax.imshow(image)
@@ -92,10 +95,28 @@ def visualize(args: argparse.Namespace) -> None:
         ax.set_title("Court side target (masked)")
         ax.axis("off")
 
+        ax = axes[0, 2]
+        ax.imshow(court_mask, cmap="gray", vmin=0.0, vmax=1.0)
+        ax.set_title("Court mask")
+        ax.axis("off")
+
+        ax = axes[1, 2]
+        ax.imshow(occlusion_mask, cmap="gray", vmin=0.0, vmax=1.0)
+        ax.set_title("Player/ball occlusion")
+        ax.axis("off")
+
+        ax = axes[0, 3]
+        ax.imshow(lineness_weight, cmap="gray", vmin=0.0, vmax=1.0)
+        ax.set_title("Lineness weight")
+        ax.axis("off")
+
+        axes[1, 3].axis("off")
+
         stem = f"court_learning_target_{i:03d}"
         source = Path(sample["image_path"]).name
         fig.suptitle(
-            f"{stem} | base index {sample['index']} | {source} | stride={args.output_stride} sigma={args.sigma}",
+            f"{stem} | base index {sample['index']} | {source} | "
+            f"stride={args.output_stride} sigma={args.sigma} player_occlusion={args.use_player_occlusion}",
             fontsize=11,
         )
         fig.savefig(args.out / f"{stem}.png", dpi=140)
@@ -108,11 +129,14 @@ def visualize(args: argparse.Namespace) -> None:
             side_target=side_target,
             side_weight=side_weight,
             court_mask=court_mask,
+            annotation_occlusion_mask=occlusion_mask,
+            lineness_weight=lineness_weight,
             visible=sample["visible"].numpy(),
             line_names=np.array(FIBA_MARKING_NAMES),
             image_path=str(sample["image_path"]),
             base_index=int(sample["index"]),
             score_bar=bool(sample["score_bar"]),
+            use_player_occlusion=bool(args.use_player_occlusion),
         )
         print(f"wrote {args.out / f'{stem}.png'}")
 
@@ -120,7 +144,7 @@ def visualize(args: argparse.Namespace) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path("data/deepsport-dataset"))
-    parser.add_argument("--out", type=Path, default=Path("tests/court_learning_targets"))
+    parser.add_argument("--out", type=Path, default=Path("tests/output/court_learning_targets"))
     parser.add_argument("--count", type=int, default=6)
     parser.add_argument("--split", choices=("train", "val", "test"), default="train")
     parser.add_argument("--seed", type=int, default=1430)
@@ -132,6 +156,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--sigma", type=float, default=1.5)
     parser.add_argument("--side-blur-sigma", type=float, default=1.0)
     parser.add_argument("--augment", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--use-player-occlusion", action=argparse.BooleanOptionalAction, default=False)
     return parser
 
 

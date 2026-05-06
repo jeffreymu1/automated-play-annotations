@@ -38,12 +38,25 @@ def random_crop_transform(
 
     if augment:
         target_aspect = out_w / out_h
-        crop_h = random.randint(max(2, int(0.72 * in_h)), in_h)
+        aggressive_zoom = random.random() < 0.45
+        min_crop_frac = 0.42 if aggressive_zoom else 0.72
+        max_crop_frac = 0.72 if aggressive_zoom else 1.0
+        min_crop_h = max(2, int(min_crop_frac * in_h))
+        max_crop_h = max(min_crop_h, int(max_crop_frac * in_h))
+        crop_h = random.randint(min_crop_h, min(in_h, max_crop_h))
         crop_w = int(round(crop_h * target_aspect))
         if crop_w > in_w:
             crop_w = in_w
             crop_h = min(in_h, int(round(crop_w / target_aspect)))
-        x0 = random.randint(0, max(0, in_w - crop_w))
+        max_x0 = max(0, in_w - crop_w)
+        if aggressive_zoom and max_x0 > 0 and random.random() < 0.70:
+            edge_span = max(1, int(round(0.25 * max_x0)))
+            if random.random() < 0.5:
+                x0 = random.randint(0, edge_span)
+            else:
+                x0 = random.randint(max(0, max_x0 - edge_span), max_x0)
+        else:
+            x0 = random.randint(0, max_x0)
         y0 = random.randint(0, max(0, in_h - crop_h))
     else:
         x0, y0 = 0, 0

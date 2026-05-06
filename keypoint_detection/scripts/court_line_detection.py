@@ -1,4 +1,4 @@
-"""Train, evaluate, and visualize the expanded FIBA court-marking detector."""
+"""Train and evaluate the expanded FIBA court-marking detector."""
 
 from __future__ import annotations
 
@@ -19,9 +19,15 @@ from court_detection.markings import (
     FIBA_MARKING_NAMES as LINE_NAMES,
     FibaCourtMarkingDataModule as CourtLineDataModule,
     FibaCourtMarkingLightning as CourtLineLightning,
+    FibaStructuredSideCourtMarkingLightning,
     class_palette,
     overlay_line_predictions,
 )
+
+MODEL_ARCHITECTURES = {
+    "dense-side": CourtLineLightning,
+    "structured-side": FibaStructuredSideCourtMarkingLightning,
+}
 
 
 def _make_datamodule(args: argparse.Namespace, image_size: tuple[int, int] | None = None) -> CourtLineDataModule:
@@ -38,13 +44,17 @@ def _make_datamodule(args: argparse.Namespace, image_size: tuple[int, int] | Non
         val_fraction=args.val_fraction,
         test_fraction=args.test_fraction,
         side_blur_sigma=args.side_blur_sigma,
+        use_player_occlusion=args.use_player_occlusion,
+        pan_train_ratio=args.pan_train_ratio,
+        pan_camera_portion_range=tuple(args.pan_camera_portion_range),
     )
 
 
 def train(args: argparse.Namespace) -> None:
     L.seed_everything(args.seed, workers=True)
     dm = _make_datamodule(args)
-    model = CourtLineLightning(
+    model_cls = MODEL_ARCHITECTURES[args.architecture]
+    model_kwargs = dict(
         model_name=args.model_name,
         pretrained=args.pretrained,
         decoder_channels=args.decoder_channels,
@@ -60,6 +70,16 @@ def train(args: argparse.Namespace) -> None:
         weight_decay=args.weight_decay,
         warmup_steps=args.warmup_steps,
     )
+    if args.architecture == "structured-side":
+        model_kwargs.update(
+            lambda_side_aux=args.lambda_side_aux,
+            max_side_slope=args.max_side_slope,
+            side_residual_dx=tuple(args.side_residual_dx),
+            side_residual_dm=tuple(args.side_residual_dm),
+            min_side_sharpness=args.min_side_sharpness,
+            max_side_sharpness=args.max_side_sharpness,
+        )
+    model = model_cls(**model_kwargs)
     checkpoint_cb = ModelCheckpoint(
         dirpath=args.out,
         filename="fiba-court-markings-{epoch:03d}-{val_line_iou:.3f}",
@@ -73,7 +93,6 @@ def train(args: argparse.Namespace) -> None:
         callbacks.append(
             BestCheckpointVisualizationCallback(
                 root=args.root,
-                out_root=args.best_vis_out,
                 footage_root=args.test_footage,
                 image_size=(args.image_height, args.image_width),
                 min_epoch=args.visualize_min_epoch,
@@ -84,6 +103,7 @@ def train(args: argparse.Namespace) -> None:
                 val_fraction=args.val_fraction,
                 test_fraction=args.test_fraction,
                 side_blur_sigma=args.side_blur_sigma,
+                use_player_occlusion=args.use_player_occlusion,
             )
         )
     logger = TensorBoardLogger(save_dir=args.log_dir, name=args.log_name)
@@ -110,7 +130,6 @@ class BestCheckpointVisualizationCallback(Callback):
     def __init__(
         self,
         root: Path,
-        out_root: Path,
         footage_root: Path,
         image_size: tuple[int, int],
         min_epoch: int,
@@ -121,9 +140,9 @@ class BestCheckpointVisualizationCallback(Callback):
         val_fraction: float,
         test_fraction: float,
         side_blur_sigma: float,
+        use_player_occlusion: bool,
     ) -> None:
         self.root = root
-        self.out_root = out_root
         self.footage_root = footage_root
         self.image_size = image_size
         self.min_epoch = min_epoch
@@ -134,6 +153,7 @@ class BestCheckpointVisualizationCallback(Callback):
         self.val_fraction = val_fraction
         self.test_fraction = test_fraction
         self.side_blur_sigma = side_blur_sigma
+        self.use_player_occlusion = use_player_occlusion
         self.best_score = -float("inf")
 
     def on_validation_epoch_end(self, trainer: L.Trainer, pl_module: CourtLineLightning) -> None:
@@ -150,17 +170,11 @@ class BestCheckpointVisualizationCallback(Callback):
         if epoch_num < self.min_epoch:
             return
 
-        out_dir = self.out_root / f"epoch_{epoch_num:03d}_val_line_iou_{score:.3f}"
-        out_dir.mkdir(parents=True, exist_ok=True)
-        checkpoint_path = out_dir / "checkpoint.ckpt"
-        trainer.save_checkpoint(checkpoint_path)
-        print(f"new best after epoch {epoch_num}: {score:.3f}; visualizing {checkpoint_path}")
-        self._visualize_checkpoint(checkpoint_path, out_dir, trainer, pl_module, epoch_num)
+        print(f"new best after epoch {epoch_num}: {score:.3f}; logging prediction visualizations")
+        self._log_best_visualizations(trainer, pl_module, epoch_num)
 
-    def _visualize_checkpoint(
+    def _log_best_visualizations(
         self,
-        checkpoint_path: Path,
-        out_dir: Path,
         trainer: L.Trainer,
         pl_module: CourtLineLightning,
         epoch_num: int,
@@ -182,7 +196,6 @@ class BestCheckpointVisualizationCallback(Callback):
                 device,
                 palette,
                 line_names,
-                out_dir / "dataset_test",
                 figure_writer,
                 global_step,
                 f"{tag_prefix}/dataset_test",
@@ -192,7 +205,6 @@ class BestCheckpointVisualizationCallback(Callback):
                 device,
                 palette,
                 line_names,
-                out_dir / "test_footage",
                 figure_writer,
                 global_step,
                 f"{tag_prefix}/test_footage",
@@ -207,7 +219,6 @@ class BestCheckpointVisualizationCallback(Callback):
         device: torch.device,
         palette: np.ndarray,
         line_names: tuple[str, ...],
-        out_dir: Path,
         figure_writer: object | None,
         global_step: int,
         tag_prefix: str,
@@ -223,9 +234,10 @@ class BestCheckpointVisualizationCallback(Callback):
             val_fraction=self.val_fraction,
             test_fraction=self.test_fraction,
             side_blur_sigma=self.side_blur_sigma,
+            use_player_occlusion=self.use_player_occlusion,
+            pan_train_ratio=0.0,
         )
         dm.setup("test")
-        out_dir.mkdir(parents=True, exist_ok=True)
         count = min(self.dataset_count, len(dm.test_dataset))
         for i in range(count):
             sample = dm.test_dataset[i]
@@ -245,7 +257,7 @@ class BestCheckpointVisualizationCallback(Callback):
 
             title = f"test sample {i} | base index {sample['index']} | {Path(sample['image_path']).name}"
             _save_prediction_panel(
-                out_dir / f"dataset_test_{i:03d}.png",
+                None,
                 title,
                 image_rgb,
                 pred_overlay,
@@ -269,18 +281,14 @@ class BestCheckpointVisualizationCallback(Callback):
         device: torch.device,
         palette: np.ndarray,
         line_names: tuple[str, ...],
-        out_dir: Path,
         figure_writer: object | None,
         global_step: int,
         tag_prefix: str,
     ) -> None:
-        out_dir.mkdir(parents=True, exist_ok=True)
         for clip_dir in sorted(path for path in self.footage_root.iterdir() if path.is_dir()):
             frames_dir = clip_dir / "frames"
             if not frames_dir.is_dir():
                 continue
-            clip_out = out_dir / clip_dir.name
-            clip_out.mkdir(parents=True, exist_ok=True)
             frame_paths = sorted(
                 path for path in frames_dir.iterdir()
                 if path.is_file() and path.suffix.lower() in {".png", ".jpg", ".jpeg", ".bmp", ".webp"}
@@ -290,7 +298,7 @@ class BestCheckpointVisualizationCallback(Callback):
                 line_prob, class_probs, side_prob, court_prob = _predict_image_full(model, image_rgb, self.image_size, device)
                 pred_overlay = overlay_line_predictions(image_rgb, class_probs, line_prob, palette)
                 _save_prediction_panel(
-                    clip_out / f"{path.stem}_markings_panel.png",
+                    None,
                     f"{clip_dir.name} | {path.name}",
                     image_rgb,
                     pred_overlay,
@@ -339,7 +347,7 @@ def _predict_image_full(
 
 
 def _save_prediction_panel(
-    out_path: Path,
+    out_path: Path | None,
     title: str,
     image_rgb: np.ndarray,
     pred_overlay: np.ndarray,
@@ -382,7 +390,8 @@ def _save_prediction_panel(
     fig.suptitle(title, fontsize=11)
     fig.legend(handles=handles, loc="lower center", ncol=min(5, len(handles)), frameon=False, fontsize=8)
     fig.tight_layout(rect=(0.0, 0.07, 1.0, 0.95))
-    fig.savefig(out_path, dpi=140)
+    if out_path is not None:
+        fig.savefig(out_path, dpi=140)
     if figure_writer is not None and tb_tag is not None:
         figure_writer.add_figure(tb_tag, fig, global_step=global_step)
     plt.close(fig)
@@ -407,177 +416,12 @@ def _side_rgb(side: np.ndarray, weight: np.ndarray | None = None) -> np.ndarray:
 
 
 def evaluate(args: argparse.Namespace) -> None:
-    model = CourtLineLightning.load_from_checkpoint(args.checkpoint, map_location="cpu", pretrained=False)
+    model_cls = MODEL_ARCHITECTURES[args.architecture]
+    model = model_cls.load_from_checkpoint(args.checkpoint, map_location="cpu", pretrained=False)
     image_size = (args.image_height, args.image_width)
     dm = _make_datamodule(args, image_size=image_size)
     trainer = L.Trainer(accelerator="auto", devices="auto", precision=args.precision)
     trainer.test(model, datamodule=dm)
-
-
-def _load_plain_image(path: Path, image_size: tuple[int, int]) -> tuple[np.ndarray, np.ndarray]:
-    image_bgr = cv2.imread(str(path), cv2.IMREAD_COLOR)
-    if image_bgr is None:
-        raise FileNotFoundError(f"Could not read image: {path}")
-    image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
-    full_image = image_rgb.astype(np.float32) / 255.0
-    model_image = cv2.resize(full_image, (image_size[1], image_size[0]), interpolation=cv2.INTER_AREA)
-    return full_image, model_image
-
-
-def _iter_image_folder(folder: Path, image_glob: str) -> list[Path]:
-    if not folder.exists():
-        raise FileNotFoundError(f"Image folder does not exist: {folder}")
-    if not folder.is_dir():
-        raise NotADirectoryError(f"Expected an image folder: {folder}")
-    image_paths = sorted(path for path in folder.glob(image_glob) if path.is_file())
-    if not image_paths:
-        raise RuntimeError(f"No images matched {image_glob!r} in {folder}")
-    return image_paths
-
-
-def _predict_full_resolution(
-    model: CourtLineLightning,
-    model_image: np.ndarray,
-    output_size: tuple[int, int],
-    device: torch.device,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    image_t = torch.from_numpy(model_image).permute(2, 0, 1).unsqueeze(0).to(device).float()
-    with torch.no_grad():
-        line_prob, class_probs, side_prob, court_prob = model.predict(image_t)
-    line_prob_full = F.interpolate(
-        line_prob.unsqueeze(1), size=output_size, mode="bilinear", align_corners=False
-    )[0, 0].cpu().numpy()
-    class_probs_full = F.interpolate(
-        class_probs, size=output_size, mode="bilinear", align_corners=False
-    )[0].cpu().numpy()
-    side_prob_full = F.interpolate(
-        side_prob.unsqueeze(1), size=output_size, mode="bilinear", align_corners=False
-    )[0, 0].cpu().numpy()
-    court_prob_full = F.interpolate(
-        court_prob.unsqueeze(1), size=output_size, mode="bilinear", align_corners=False
-    )[0, 0].cpu().numpy()
-    return line_prob_full, class_probs_full, side_prob_full, court_prob_full
-
-
-def _save_rgb(path: Path, image: np.ndarray) -> None:
-    out = np.clip(image * 255.0, 0.0, 255.0).astype(np.uint8)
-    cv2.imwrite(str(path), cv2.cvtColor(out, cv2.COLOR_RGB2BGR))
-
-
-def _visualize(args: argparse.Namespace) -> None:
-    model = CourtLineLightning.load_from_checkpoint(args.checkpoint, map_location="cpu", pretrained=False)
-    num_classes = int(model.hparams.num_classes)
-    output_stride = int(model.hparams.output_stride)
-    sigma = float(model.hparams.sigma)
-    side_blur_sigma = float(getattr(model.hparams, "side_blur_sigma", args.side_blur_sigma))
-    image_size = (args.image_height, args.image_width)
-
-    dm = CourtLineDataModule(
-        root=args.root,
-        image_size=image_size,
-        output_stride=output_stride,
-        sigma=sigma,
-        batch_size=1,
-        num_workers=args.num_workers,
-        seed=args.seed,
-        side_blur_sigma=side_blur_sigma,
-    )
-    dm.setup("test")
-    dataset = dm.val_dataset if args.split == "val" else dm.test_dataset
-
-    device = torch.device("cuda" if torch.cuda.is_available() and not args.cpu else "cpu")
-    model.to(device).eval()
-    args.out.mkdir(parents=True, exist_ok=True)
-
-    palette = class_palette(num_classes)
-    count = min(args.count, len(dataset))
-    for i in range(count):
-        sample = dataset[i]
-        image = sample["image"].unsqueeze(0).to(device)
-        with torch.no_grad():
-            line_prob, class_probs, side_prob, court_prob = model.predict(image)
-        line_prob_full = F.interpolate(
-            line_prob.unsqueeze(1), size=image_size, mode="bilinear", align_corners=False
-        )[0, 0].cpu().numpy()
-        class_probs_full = F.interpolate(
-            class_probs, size=image_size, mode="bilinear", align_corners=False
-        )[0].cpu().numpy()
-        side_prob_full = F.interpolate(
-            side_prob.unsqueeze(1), size=image_size, mode="bilinear", align_corners=False
-        )[0, 0].cpu().numpy()
-        court_prob_full = F.interpolate(
-            court_prob.unsqueeze(1), size=image_size, mode="bilinear", align_corners=False
-        )[0, 0].cpu().numpy()
-
-        image_np = sample["image"].permute(1, 2, 0).numpy()
-        gt_line = sample["lineness"].numpy()
-        gt_class = sample["class_target"].numpy()
-        gt_side = sample["side_target"].numpy()
-        gt_court = sample["court_mask"].numpy()
-
-        gt_line_full = _resize(gt_line, image_size, mode="bilinear")
-        gt_class_full = _resize(gt_class.astype(np.float32), image_size, mode="nearest").astype(np.int64)
-        gt_side_full = _resize(gt_side, image_size, mode="bilinear")
-        gt_court_full = _resize(gt_court, image_size, mode="nearest")
-        gt_class_onehot = np.zeros((num_classes, *image_size), dtype=np.float32)
-        for k in range(num_classes):
-            gt_class_onehot[k] = (gt_class_full == k).astype(np.float32)
-
-        pred_overlay = overlay_line_predictions(image_np, class_probs_full, line_prob_full, palette)
-        gt_overlay = overlay_line_predictions(image_np, gt_class_onehot, gt_line_full, palette)
-
-        legend_handles = [
-            plt.Line2D([0], [0], marker="s", color="w", markerfacecolor=palette[k], markersize=10, label=name)
-            for k, name in enumerate(LINE_NAMES[:num_classes])
-        ]
-
-        fig, axes = plt.subplots(2, 3, figsize=(16, 8))
-        axes[0, 0].imshow(image_np)
-        axes[0, 0].set_title("Input frame")
-        axes[0, 0].axis("off")
-        axes[0, 1].imshow(gt_overlay)
-        axes[0, 1].set_title("GT overlay")
-        axes[0, 1].axis("off")
-        axes[0, 2].imshow(_side_rgb(gt_side_full, gt_court_full))
-        axes[0, 2].set_title("GT court side/mask")
-        axes[0, 2].axis("off")
-        axes[1, 0].imshow(pred_overlay)
-        axes[1, 0].set_title("Prediction overlay")
-        axes[1, 0].axis("off")
-        axes[1, 1].imshow(line_prob_full, cmap="inferno", vmin=0.0, vmax=1.0)
-        axes[1, 1].set_title("Predicted lineness")
-        axes[1, 1].axis("off")
-        axes[1, 2].imshow(_side_rgb(side_prob_full, court_prob_full >= 0.5))
-        axes[1, 2].set_title("Predicted court side (masked)")
-        axes[1, 2].axis("off")
-        fig.legend(handles=legend_handles, loc="lower center", ncol=min(5, num_classes), frameon=False)
-        fig.tight_layout(rect=(0.0, 0.04, 1.0, 1.0))
-        out_path = args.out / f"line_vis_{i:03d}.png"
-        fig.savefig(out_path, dpi=150)
-        plt.close(fig)
-        print(f"wrote {out_path}")
-
-
-def _visualize_folder(args: argparse.Namespace) -> None:
-    model = CourtLineLightning.load_from_checkpoint(args.checkpoint, map_location="cpu", pretrained=False)
-    num_classes = int(model.hparams.num_classes)
-    image_size = (args.image_height, args.image_width)
-    image_paths = _iter_image_folder(args.image_folder, args.image_glob)
-
-    device = torch.device("cuda" if torch.cuda.is_available() and not args.cpu else "cpu")
-    model.to(device).eval()
-    args.out.mkdir(parents=True, exist_ok=True)
-
-    palette = class_palette(num_classes)
-    for i, image_path in enumerate(image_paths):
-        full_image, model_image = _load_plain_image(image_path, image_size)
-        line_prob_full, class_probs_full, _, _ = _predict_full_resolution(
-            model, model_image, full_image.shape[:2], device
-        )
-        heatmap_overlay = overlay_line_predictions(full_image, class_probs_full, line_prob_full, palette)
-        out_path = args.out / f"{image_path.stem}_line_heatmap.png"
-        _save_rgb(out_path, heatmap_overlay)
-        print(f"frame {i + 1}/{len(image_paths)}: wrote {out_path}")
 
 
 def _resize(arr: np.ndarray, size: tuple[int, int], mode: str) -> np.ndarray:
@@ -609,11 +453,15 @@ def build_parser() -> argparse.ArgumentParser:
         p.add_argument("--output-stride", type=int, default=2)
         p.add_argument("--sigma", type=float, default=1.5)
         p.add_argument("--side-blur-sigma", type=float, default=1.0)
+        p.add_argument("--use-player-occlusion", action=argparse.BooleanOptionalAction, default=False)
+        p.add_argument("--pan-train-ratio", type=float, default=1.0)
+        p.add_argument("--pan-camera-portion-range", type=float, nargs=2, default=(0.0, 1.0))
         p.add_argument("--image-height", type=int, default=384)
         p.add_argument("--image-width", type=int, default=640)
 
     train_parser = subparsers.add_parser("train", help="Train the expanded FIBA court-marking model.")
     add_data_args(train_parser)
+    train_parser.add_argument("--architecture", choices=sorted(MODEL_ARCHITECTURES), default="dense-side")
     train_parser.add_argument("--model-name", default="convnext_base.dinov3_lvd1689m")
     train_parser.add_argument("--pretrained", action=argparse.BooleanOptionalAction, default=True)
     train_parser.add_argument("--decoder-channels", type=int, default=128)
@@ -622,7 +470,13 @@ def build_parser() -> argparse.ArgumentParser:
     train_parser.add_argument("--lambda-focal", type=float, default=1.0)
     train_parser.add_argument("--lambda-class", type=float, default=1.0)
     train_parser.add_argument("--lambda-side", type=float, default=0.25)
+    train_parser.add_argument("--lambda-side-aux", type=float, default=0.2)
     train_parser.add_argument("--lambda-court", type=float, default=0.5)
+    train_parser.add_argument("--max-side-slope", type=float, default=2.0)
+    train_parser.add_argument("--side-residual-dx", type=float, nargs=3, default=(48.0, 24.0, 12.0))
+    train_parser.add_argument("--side-residual-dm", type=float, nargs=3, default=(0.45, 0.25, 0.12))
+    train_parser.add_argument("--min-side-sharpness", type=float, default=0.25)
+    train_parser.add_argument("--max-side-sharpness", type=float, default=8.0)
     train_parser.add_argument("--lr", type=float, default=3e-4)
     train_parser.add_argument("--weight-decay", type=float, default=1e-4)
     train_parser.add_argument("--warmup-steps", type=int, default=200)
@@ -640,30 +494,14 @@ def build_parser() -> argparse.ArgumentParser:
     train_parser.add_argument("--visualize-footage-stride", type=int, default=5)
     train_parser.add_argument("--visualize-num-workers", type=int, default=0)
     train_parser.add_argument("--test-footage", type=Path, default=Path("test_footage"))
-    train_parser.add_argument("--best-vis-out", type=Path, default=Path("tests/fiba_court_markings_side_best_vis"))
     train_parser.set_defaults(func=train)
 
     eval_parser = subparsers.add_parser("eval", help="Evaluate a saved checkpoint.")
     add_data_args(eval_parser)
     eval_parser.add_argument("--checkpoint", type=Path, required=True)
+    eval_parser.add_argument("--architecture", choices=sorted(MODEL_ARCHITECTURES), default="dense-side")
     eval_parser.add_argument("--precision", default="32-true")
     eval_parser.set_defaults(func=evaluate)
-
-    vis_parser = subparsers.add_parser("vis", help="Save line prediction visualizations.")
-    vis_parser.add_argument("--root", type=Path, default=Path("data/deepsport-dataset"))
-    vis_parser.add_argument("--checkpoint", type=Path, required=True)
-    vis_parser.add_argument("--out", type=Path, default=Path("results/line_vis"))
-    vis_parser.add_argument("--count", type=int, default=6)
-    vis_parser.add_argument("--split", choices=("val", "test"), default="val")
-    vis_parser.add_argument("--image-folder", type=Path, default=None, help="Optional folder of images to visualize in filename order.")
-    vis_parser.add_argument("--image-glob", default="*.jpg", help="Glob used with --image-folder.")
-    vis_parser.add_argument("--num-workers", type=int, default=0)
-    vis_parser.add_argument("--seed", type=int, default=1430)
-    vis_parser.add_argument("--side-blur-sigma", type=float, default=1.0)
-    vis_parser.add_argument("--image-height", type=int, default=384)
-    vis_parser.add_argument("--image-width", type=int, default=640)
-    vis_parser.add_argument("--cpu", action="store_true")
-    vis_parser.set_defaults(func=_visualize)
 
     return parser
 
@@ -672,8 +510,6 @@ def main() -> None:
     if torch.cuda.is_available():
         torch.set_float32_matmul_precision("medium")
     args = build_parser().parse_args()
-    if args.command == "vis" and args.image_folder is not None:
-        args.func = _visualize_folder
     args.func(args)
 
 

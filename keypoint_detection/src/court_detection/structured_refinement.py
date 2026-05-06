@@ -182,6 +182,8 @@ def extract_structured_corners(
 def line_point_dlt(
     line_corrs: list[tuple[str, np.ndarray, np.ndarray]],
     point_corrs: list[tuple[str, np.ndarray, np.ndarray]],
+    line_weights: dict[str, float] | None = None,
+    point_weights: dict[str, float] | None = None,
 ) -> np.ndarray:
     if 2 * len(line_corrs) + 2 * len(point_corrs) < 8:
         raise ValueError("Need at least 8 linear constraints for homography DLT")
@@ -191,16 +193,18 @@ def line_point_dlt(
     Ti = _hartley_transform(image_points)
 
     rows: list[np.ndarray] = []
-    for _, lw, li in line_corrs:
+    for name, lw, li in line_corrs:
         lw_n = np.linalg.inv(Tw).T @ lw
         li_n = np.linalg.inv(Ti).T @ li
-        rows.extend(_line_constraint_rows(_normalize_line(lw_n), _normalize_line(li_n)))
-    for _, world, image in point_corrs:
+        weight = _dlt_weight(name, line_weights)
+        rows.extend(weight * row for row in _line_constraint_rows(_normalize_line(lw_n), _normalize_line(li_n)))
+    for name, world, image in point_corrs:
         X = Tw @ np.array([world[0], world[1], 1.0], dtype=float)
         x = Ti @ np.array([image[0], image[1], 1.0], dtype=float)
         X = X / X[2]
         x = x / x[2]
-        rows.extend(_point_constraint_rows(X[:2], x[:2]))
+        weight = _dlt_weight(name, point_weights)
+        rows.extend(weight * row for row in _point_constraint_rows(X[:2], x[:2]))
 
     A = np.stack(rows)
     _, _, vh = np.linalg.svd(A)
@@ -209,6 +213,15 @@ def line_point_dlt(
     if abs(H[2, 2]) > 1e-12:
         H = H / H[2, 2]
     return H
+
+
+def _dlt_weight(name: str, weights: dict[str, float] | None) -> float:
+    if weights is None:
+        return 1.0
+    weight = float(weights.get(name, 1.0))
+    if not np.isfinite(weight) or weight <= 0.0:
+        return 1.0
+    return float(np.sqrt(weight))
 
 
 def project_world_points(H: np.ndarray, world_xy: np.ndarray) -> np.ndarray:

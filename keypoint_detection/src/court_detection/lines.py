@@ -70,6 +70,7 @@ def _render_line_targets(
     line_names: tuple[str, ...] = MARKING_CLASS_NAMES,
     class_by_geometry: dict[str, str] = MARKING_CLASS_BY_GEOMETRY,
     visible_mask: np.ndarray | None = None,
+    lineness_weight: np.ndarray | None = None,
     foul_line_occlusion_names: dict[str, str] | None = None,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Build (lineness, class_id, visible) targets at output stride from per-line UV samples.
@@ -88,6 +89,14 @@ def _render_line_targets(
             (out_w, out_h),
             interpolation=cv2.INTER_NEAREST,
         ).astype(bool)
+    target_weight = None
+    if lineness_weight is not None:
+        target_weight = cv2.resize(
+            lineness_weight.astype(np.float32),
+            (out_w, out_h),
+            interpolation=cv2.INTER_LINEAR,
+        ).astype(np.float32)
+        target_weight = np.clip(target_weight, 0.0, 1.0)
 
     distances = np.full((num_classes, out_h, out_w), np.inf, dtype=np.float32)
     visible = np.zeros(num_classes, dtype=bool)
@@ -136,16 +145,42 @@ def _render_line_targets(
         if mask.any():
             visible[class_idx] = True
             dist = cv2.distanceTransform(1 - mask, cv2.DIST_L2, maskSize=3)
-            distances[class_idx] = dist
+            distances[class_idx] = np.minimum(distances[class_idx], dist)
 
     nearest_class = distances.argmin(axis=0).astype(np.int64)
     min_dist = distances.min(axis=0)
     lineness = np.exp(-0.5 * (min_dist ** 2) / (sigma ** 2)).astype(np.float32)
     lineness[~np.isfinite(min_dist)] = 0.0
+    if target_weight is not None:
+        lineness *= target_weight
     if target_mask is not None:
         lineness[~target_mask] = 0.0
 
     return lineness, nearest_class, visible
+
+
+def _soft_occlusion_lineness_weight(
+    occlusion_mask: np.ndarray,
+    output_stride: int,
+    sigma: float,
+) -> np.ndarray:
+    if not occlusion_mask.any():
+        return np.ones(occlusion_mask.shape, dtype=np.float32)
+
+    h, w = occlusion_mask.shape
+    out_h = max(1, h // output_stride)
+    out_w = max(1, w // output_stride)
+    occ_out = cv2.resize(
+        occlusion_mask.astype(np.uint8),
+        (out_w, out_h),
+        interpolation=cv2.INTER_NEAREST,
+    ).astype(bool)
+    if not occ_out.any():
+        return np.ones((h, w), dtype=np.float32)
+
+    dist_out = cv2.distanceTransform((~occ_out).astype(np.uint8), cv2.DIST_L2, maskSize=3)
+    weight_out = (1.0 - np.exp(-0.5 * (dist_out ** 2) / (sigma ** 2))).astype(np.float32)
+    return cv2.resize(weight_out, (w, h), interpolation=cv2.INTER_LINEAR).clip(0.0, 1.0).astype(np.float32)
 
 
 def _render_side_target(
@@ -233,6 +268,7 @@ class CourtLineFrameDataset(Dataset):
         class_by_geometry: dict[str, str] = MARKING_CLASS_BY_GEOMETRY,
         n_samples_per_line: int = 400,
         side_blur_sigma: float = 1.0,
+        use_player_occlusion: bool = False,
     ) -> None:
         self.base = base
         self.indices = indices
@@ -244,6 +280,7 @@ class CourtLineFrameDataset(Dataset):
         self.class_by_geometry = dict(class_by_geometry)
         self.n_samples_per_line = n_samples_per_line
         self.side_blur_sigma = side_blur_sigma
+        self.use_player_occlusion = use_player_occlusion
 
     def __len__(self) -> int:
         if self.augment:
@@ -280,19 +317,43 @@ class CourtLineFrameDataset(Dataset):
             base_idx = self.indices[idx]
             use_score_bar = False
 
-        image, _, calib = self.base[base_idx]
+        base_sample = self.base[base_idx]
+        image, _, calib = base_sample[:3]
         image_np = image.permute(1, 2, 0).numpy()
         target_mask = np.ones(image_np.shape[:2], dtype=bool)
+        occlusion_mask = np.zeros(image_np.shape[:2], dtype=bool)
+        if self.use_player_occlusion:
+            loaded_mask = np.zeros((0, 0), dtype=bool)
+            if len(base_sample) >= 4:
+                candidate_mask = base_sample[-1]
+                if isinstance(candidate_mask, torch.Tensor) and candidate_mask.ndim == 2:
+                    loaded_mask = candidate_mask.numpy().astype(bool)
+                elif isinstance(candidate_mask, np.ndarray) and candidate_mask.ndim == 2:
+                    loaded_mask = candidate_mask.astype(bool)
+            if not loaded_mask.size and hasattr(self.base, "samples"):
+                _, json_path = self.base.samples[base_idx]
+                loaded_mask = self.base.load_annotation_occlusion_mask(json_path)
+            if loaded_mask.size:
+                occlusion_mask = loaded_mask
 
         lines_uv = self._project_lines(calib)
         crop = random_crop_transform(image_np.shape[:2], self.image_size, augment=self.augment)
         image_np = crop_resize_image(image_np, crop)
         target_mask = crop_resize_mask(target_mask, crop)
+        occlusion_mask = crop_resize_mask(occlusion_mask, crop)
         lines_uv = transform_line_uv(lines_uv, crop)
         if use_score_bar:
             image_np, target_mask = apply_score_bar(image_np, target_mask)
         if self.augment:
             image_np = augment_color(image_np)
+
+        lineness_weight = None
+        if self.use_player_occlusion:
+            lineness_weight = _soft_occlusion_lineness_weight(
+                occlusion_mask,
+                output_stride=self.output_stride,
+                sigma=self.sigma,
+            )
 
         lineness, class_target, visible = _render_line_targets(
             lines_uv,
@@ -302,6 +363,7 @@ class CourtLineFrameDataset(Dataset):
             line_names=self.line_names,
             class_by_geometry=self.class_by_geometry,
             visible_mask=target_mask,
+            lineness_weight=lineness_weight,
             foul_line_occlusion_names={
                 "foul_left": "free_throw_circle_left",
                 "foul_right": "free_throw_circle_right",
@@ -317,7 +379,13 @@ class CourtLineFrameDataset(Dataset):
         court_mask = side_weight
 
         image_t = torch.from_numpy(image_np).permute(2, 0, 1).contiguous().float()
-        image_path, _ = self.base.samples[base_idx]
+        if hasattr(self.base, "samples"):
+            image_path, _ = self.base.samples[base_idx]
+            image_path_str = str(image_path)
+        elif hasattr(self.base, "sample_label"):
+            image_path_str = str(self.base.sample_label(base_idx))
+        else:
+            image_path_str = f"{type(self.base).__name__}:{base_idx}"
         return {
             "image": image_t,
             "lineness": torch.from_numpy(lineness),
@@ -325,9 +393,13 @@ class CourtLineFrameDataset(Dataset):
             "side_target": torch.from_numpy(side_target),
             "side_weight": torch.from_numpy(side_weight),
             "court_mask": torch.from_numpy(court_mask),
+            "annotation_occlusion_mask": torch.from_numpy(occlusion_mask),
+            "lineness_weight": torch.from_numpy(
+                lineness_weight if lineness_weight is not None else np.ones(image_np.shape[:2], dtype=np.float32)
+            ),
             "visible": torch.from_numpy(visible),
             "index": base_idx,
-            "image_path": str(image_path),
+            "image_path": image_path_str,
             "score_bar": use_score_bar,
         }
 
@@ -348,6 +420,7 @@ class CourtLineDataModule(L.LightningDataModule):
         class_by_geometry: dict[str, str] = MARKING_CLASS_BY_GEOMETRY,
         n_samples_per_line: int = 400,
         side_blur_sigma: float = 1.0,
+        use_player_occlusion: bool = False,
     ) -> None:
         super().__init__()
         self.root = root
@@ -363,6 +436,7 @@ class CourtLineDataModule(L.LightningDataModule):
         self.class_by_geometry = dict(class_by_geometry)
         self.n_samples_per_line = n_samples_per_line
         self.side_blur_sigma = side_blur_sigma
+        self.use_player_occlusion = use_player_occlusion
 
     def setup(self, stage: str | None = None) -> None:
         base = DeepSportDataset(self.root)
@@ -388,6 +462,7 @@ class CourtLineDataModule(L.LightningDataModule):
             class_by_geometry=self.class_by_geometry,
             n_samples_per_line=self.n_samples_per_line,
             side_blur_sigma=self.side_blur_sigma,
+            use_player_occlusion=self.use_player_occlusion,
         )
         self.train_dataset = CourtLineFrameDataset(base, train_indices, augment=True, **kwargs)
         self.val_dataset = CourtLineFrameDataset(base, val_indices, augment=False, **kwargs)
