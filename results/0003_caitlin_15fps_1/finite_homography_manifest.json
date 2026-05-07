@@ -1,0 +1,1998 @@
+{
+  "frames": [
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000001.jpg",
+      "homography": [
+        [
+          1.2976246799331834,
+          0.013802437136430794,
+          -1983.4209028933485
+        ],
+        [
+          -0.05198476172007986,
+          0.1880625713781676,
+          510.4513129420852
+        ],
+        [
+          7.63965419769377e-05,
+          -0.0002998354886405932,
+          1.0
+        ]
+      ],
+      "frame_index": 1,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.30462685575247733,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000001_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000002.jpg",
+      "homography": [
+        [
+          1.326489038488743,
+          0.0339807148354631,
+          -2086.068995912945
+        ],
+        [
+          -0.055882683268449834,
+          0.19383561331860374,
+          522.7281208991526
+        ],
+        [
+          7.833929629642725e-05,
+          -0.00029500444319022586,
+          1.0
+        ]
+      ],
+      "frame_index": 2,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2811858010374946,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000002_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000003.jpg",
+      "homography": [
+        [
+          0.8728460485480892,
+          -0.02416868620178626,
+          -1253.927217747754
+        ],
+        [
+          -0.07414763659203735,
+          0.13195908824013494,
+          479.94615032396865
+        ],
+        [
+          -3.371254079375072e-05,
+          -0.0002583276853991943,
+          1.0
+        ]
+      ],
+      "frame_index": 3,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.25458823644708845,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000003_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000004.jpg",
+      "homography": [
+        [
+          1.4800777139472672,
+          -0.0014564289996294969,
+          -2499.2230831551046
+        ],
+        [
+          -0.060113854404774465,
+          0.17999151690330362,
+          548.4113994010069
+        ],
+        [
+          9.53796219415858e-05,
+          -0.0003280636847636365,
+          1.0
+        ]
+      ],
+      "frame_index": 4,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.16892589794002807,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000004_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000005.jpg",
+      "homography": [
+        [
+          1.3794387176294247,
+          0.038373308447797135,
+          -2253.6307951195336
+        ],
+        [
+          -0.055567143807960094,
+          0.19236902553625673,
+          532.4834709832284
+        ],
+        [
+          9.169470878739096e-05,
+          -0.0003087380277502512,
+          1.0
+        ]
+      ],
+      "frame_index": 5,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2347002548044769,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000005_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000006.jpg",
+      "homography": [
+        [
+          1.5175757365535534,
+          -0.04301982414246862,
+          -2595.456548099597
+        ],
+        [
+          -0.05449894991987635,
+          0.16167481190717495,
+          544.3433793730715
+        ],
+        [
+          0.00010915906213512898,
+          -0.00036151819860208396,
+          1.0
+        ]
+      ],
+      "frame_index": 6,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.12308410522227278,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000006_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000007.jpg",
+      "homography": [
+        [
+          1.3687399054291414,
+          0.04583105919463294,
+          -2267.958500535567
+        ],
+        [
+          -0.060263102135553505,
+          0.18885282379681018,
+          546.3874762318997
+        ],
+        [
+          9.239049540807588e-05,
+          -0.00031096759651332804,
+          1.0
+        ]
+      ],
+      "frame_index": 7,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.22016404714070095,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000007_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000008.jpg",
+      "homography": [
+        [
+          1.3177176529090635,
+          0.09521518856561419,
+          -2167.6247857216485
+        ],
+        [
+          -0.06402149978788747,
+          0.20574834193444988,
+          551.5870285720843
+        ],
+        [
+          8.688283234070017e-05,
+          -0.00028523900331237285,
+          1.0
+        ]
+      ],
+      "frame_index": 8,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2682466221386395,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000008_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000009.jpg",
+      "homography": [
+        [
+          1.3741125020072207,
+          0.0730857891897641,
+          -2311.648310928962
+        ],
+        [
+          -0.06362228841316485,
+          0.19753190168821022,
+          557.1213252576936
+        ],
+        [
+          9.548885728340395e-05,
+          -0.0003035438504349177,
+          1.0
+        ]
+      ],
+      "frame_index": 9,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24809298104267513,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000009_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000010.jpg",
+      "homography": [
+        [
+          1.344696313130315,
+          0.061997029231228094,
+          -2259.112141718529
+        ],
+        [
+          -0.06539067834200113,
+          0.1891457452422873,
+          559.5453164174309
+        ],
+        [
+          9.213837388252073e-05,
+          -0.0003088385864304633,
+          1.0
+        ]
+      ],
+      "frame_index": 10,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24819255021550646,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000010_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000011.jpg",
+      "homography": [
+        [
+          1.3610675048494412,
+          0.07458008697378721,
+          -2308.919934401685
+        ],
+        [
+          -0.0639070607782939,
+          0.19411741009489633,
+          558.6860220262049
+        ],
+        [
+          9.600609056357116e-05,
+          -0.0003077694623386194,
+          1.0
+        ]
+      ],
+      "frame_index": 11,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.25890057993735044,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000011_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000012.jpg",
+      "homography": [
+        [
+          1.3770255235727464,
+          0.0865317620149224,
+          -2359.809732044149
+        ],
+        [
+          -0.06345750032019869,
+          0.1988800004690929,
+          561.0670661794561
+        ],
+        [
+          9.941921339019408e-05,
+          -0.00030694557545945476,
+          1.0
+        ]
+      ],
+      "frame_index": 12,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.26342223840794676,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000012_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000013.jpg",
+      "homography": [
+        [
+          1.3832159504903072,
+          0.09720818420163824,
+          -2396.0383837621202
+        ],
+        [
+          -0.06497332146413191,
+          0.20136705550762213,
+          566.3811899895024
+        ],
+        [
+          9.930498098149921e-05,
+          -0.00030469862212897757,
+          1.0
+        ]
+      ],
+      "frame_index": 13,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2626456054929447,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000013_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000014.jpg",
+      "homography": [
+        [
+          1.3751614581886595,
+          0.10581270908169867,
+          -2393.7005480279495
+        ],
+        [
+          -0.0667826101885021,
+          0.20245605531310304,
+          575.5174576398997
+        ],
+        [
+          9.866052907170381e-05,
+          -0.00030233992231529374,
+          1.0
+        ]
+      ],
+      "frame_index": 14,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2655738663999861,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000014_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000015.jpg",
+      "homography": [
+        [
+          1.3729965858348974,
+          0.1094754667340333,
+          -2412.5225576881357
+        ],
+        [
+          -0.06811134507325968,
+          0.19931906054037613,
+          584.3308524498714
+        ],
+        [
+          9.723828480439703e-05,
+          -0.0003030613789116613,
+          1.0
+        ]
+      ],
+      "frame_index": 15,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.25315256234443567,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000015_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000016.jpg",
+      "homography": [
+        [
+          1.377987463628,
+          0.11041297323900662,
+          -2440.9908851326163
+        ],
+        [
+          -0.06903196106896169,
+          0.19634642342807884,
+          592.8693014606815
+        ],
+        [
+          9.67358941748208e-05,
+          -0.0003046221318369311,
+          1.0
+        ]
+      ],
+      "frame_index": 16,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24399486450717103,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000016_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000017.jpg",
+      "homography": [
+        [
+          1.3453456923722853,
+          0.10065297517654899,
+          -2371.366093632143
+        ],
+        [
+          -0.07100755163303352,
+          0.18808143498381666,
+          600.036795087051
+        ],
+        [
+          9.009221280027087e-05,
+          -0.00030577279260996117,
+          1.0
+        ]
+      ],
+      "frame_index": 17,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24170476747294414,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000017_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000018.jpg",
+      "homography": [
+        [
+          1.3405119807168269,
+          0.10191217783730222,
+          -2358.1704506280175
+        ],
+        [
+          -0.07001532175630257,
+          0.18758123904101254,
+          601.734191080461
+        ],
+        [
+          8.728992276541045e-05,
+          -0.00030304993370846515,
+          1.0
+        ]
+      ],
+      "frame_index": 18,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24083995124553426,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000018_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000019.jpg",
+      "homography": [
+        [
+          1.0995344563806202,
+          0.09282110489637177,
+          -1889.4298276324087
+        ],
+        [
+          -0.08303867549871059,
+          0.16304077209815065,
+          580.5280230259514
+        ],
+        [
+          1.969649429599317e-05,
+          -0.00025668289244804433,
+          1.0
+        ]
+      ],
+      "frame_index": 19,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2311617785686406,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000019_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000020.jpg",
+      "homography": [
+        [
+          1.19525646701082,
+          0.012463540310207279,
+          -2016.1679455096312
+        ],
+        [
+          -0.07052690952937789,
+          0.1451658706604568,
+          585.460785338082
+        ],
+        [
+          5.937305565850766e-05,
+          -0.000339062840247522,
+          1.0
+        ]
+      ],
+      "frame_index": 20,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.21100640903724743,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000020_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000021.jpg",
+      "homography": [
+        [
+          1.237206765079794,
+          0.04721382069379165,
+          -2104.7631269856465
+        ],
+        [
+          -0.06894375615335238,
+          0.16191976526560228,
+          585.3104261188095
+        ],
+        [
+          6.251421288243358e-05,
+          -0.00031789278022976416,
+          1.0
+        ]
+      ],
+      "frame_index": 21,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.21782445536728604,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000021_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000022.jpg",
+      "homography": [
+        [
+          1.2403965091900369,
+          0.04795250254388396,
+          -2096.589624687562
+        ],
+        [
+          -0.06797014911079181,
+          0.16435503831966186,
+          582.0466374193958
+        ],
+        [
+          6.084663524676908e-05,
+          -0.0003137335628832742,
+          1.0
+        ]
+      ],
+      "frame_index": 22,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2195625162222974,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000022_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000023.jpg",
+      "homography": [
+        [
+          1.2334059630103695,
+          0.040846003395466346,
+          -2056.577147476336
+        ],
+        [
+          -0.06811050970303689,
+          0.16492473571863092,
+          582.6807126339731
+        ],
+        [
+          6.008237815089844e-05,
+          -0.0003147600030880678,
+          1.0
+        ]
+      ],
+      "frame_index": 23,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2224930794235011,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000023_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000024.jpg",
+      "homography": [
+        [
+          1.2535418077665506,
+          0.04397372374130806,
+          -2105.8472849936193
+        ],
+        [
+          -0.067817778412116,
+          0.16590694449190413,
+          580.0420929647861
+        ],
+        [
+          5.645020932026778e-05,
+          -0.00030807563566696584,
+          1.0
+        ]
+      ],
+      "frame_index": 24,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.20176433383165654,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000024_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000025.jpg",
+      "homography": [
+        [
+          1.229685944828542,
+          0.015141474346818047,
+          -2024.4729475830497
+        ],
+        [
+          -0.06763799193784739,
+          0.1569258427481391,
+          582.3027805891688
+        ],
+        [
+          5.636991983400445e-05,
+          -0.00032240740118349477,
+          1.0
+        ]
+      ],
+      "frame_index": 25,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.21161980625540838,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000025_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000026.jpg",
+      "homography": [
+        [
+          1.341358650658601,
+          0.07538125042577401,
+          -2252.6556704543646
+        ],
+        [
+          -0.06443766522039346,
+          0.18789830785229553,
+          598.1257414882758
+        ],
+        [
+          7.796837358391224e-05,
+          -0.0002981724176783445,
+          1.0
+        ]
+      ],
+      "frame_index": 26,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2570220080440784,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000026_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000027.jpg",
+      "homography": [
+        [
+          1.3118635506598815,
+          0.060939560951178987,
+          -2191.087486979088
+        ],
+        [
+          -0.06804329640092674,
+          0.17874478450756967,
+          605.9228422937246
+        ],
+        [
+          7.037775340213792e-05,
+          -0.00029948940506407577,
+          1.0
+        ]
+      ],
+      "frame_index": 27,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.26147862015022155,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000027_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000028.jpg",
+      "homography": [
+        [
+          1.299062484761765,
+          0.0581940092826289,
+          -2164.98861178085
+        ],
+        [
+          -0.07061736219270308,
+          0.17617385341101455,
+          612.188222700156
+        ],
+        [
+          6.637093690317695e-05,
+          -0.00029761471549044204,
+          1.0
+        ]
+      ],
+      "frame_index": 28,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24663725669701525,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000028_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000029.jpg",
+      "homography": [
+        [
+          1.2755058791897202,
+          0.06726047454419548,
+          -2113.7424569902487
+        ],
+        [
+          -0.07299193946649196,
+          0.1787860818596183,
+          614.0696378368197
+        ],
+        [
+          6.019899736961103e-05,
+          -0.00028880914627369715,
+          1.0
+        ]
+      ],
+      "frame_index": 29,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.25559363643073163,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000029_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000030.jpg",
+      "homography": [
+        [
+          1.330352364663128,
+          0.0973798881802306,
+          -2240.2022730625663
+        ],
+        [
+          -0.07092302493510992,
+          0.19534623419955385,
+          610.6918150466562
+        ],
+        [
+          6.581992556348588e-05,
+          -0.0002790710241579164,
+          1.0
+        ]
+      ],
+      "frame_index": 30,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2531904375852672,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000030_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000031.jpg",
+      "homography": [
+        [
+          1.2634785632081942,
+          0.08600318786406419,
+          -2086.649026305729
+        ],
+        [
+          -0.07692388260815705,
+          0.18659184616069707,
+          615.253156123545
+        ],
+        [
+          5.3684411946217694e-05,
+          -0.0002729256651753236,
+          1.0
+        ]
+      ],
+      "frame_index": 31,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.25090042036186533,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000031_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000032.jpg",
+      "homography": [
+        [
+          1.2615284409143004,
+          0.08112284566693358,
+          -2064.3414058678377
+        ],
+        [
+          -0.07275632856749185,
+          0.18598415369076218,
+          605.8623787761743
+        ],
+        [
+          5.43067235930964e-05,
+          -0.0002736800446441741,
+          1.0
+        ]
+      ],
+      "frame_index": 32,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2598459286684281,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000032_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000033.jpg",
+      "homography": [
+        [
+          1.306777825761453,
+          0.10814664711787962,
+          -2139.003464737672
+        ],
+        [
+          -0.06346449678959885,
+          0.2045963052871365,
+          589.3965508455865
+        ],
+        [
+          6.476554078834831e-05,
+          -0.00026963551700129773,
+          1.0
+        ]
+      ],
+      "frame_index": 33,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.22151327774486748,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000033_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000034.jpg",
+      "homography": [
+        [
+          1.3161802008864134,
+          0.09737368544071061,
+          -2143.736976898387
+        ],
+        [
+          -0.06137320887005636,
+          0.20209989417767107,
+          586.4184020488831
+        ],
+        [
+          6.62457374377246e-05,
+          -0.0002742603521717954,
+          1.0
+        ]
+      ],
+      "frame_index": 34,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2513942447557084,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000034_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000035.jpg",
+      "homography": [
+        [
+          1.3110331296941635,
+          0.08082557561090849,
+          -2125.1946398763153
+        ],
+        [
+          -0.06334702598724752,
+          0.19554077010558846,
+          588.936519451761
+        ],
+        [
+          6.30800324046667e-05,
+          -0.0002781035095468153,
+          1.0
+        ]
+      ],
+      "frame_index": 35,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2517572142466031,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000035_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000036.jpg",
+      "homography": [
+        [
+          1.632745514636142,
+          0.06273788514631334,
+          -2990.7715514261254
+        ],
+        [
+          -0.09256348307345647,
+          0.19189704908122845,
+          677.4379323974755
+        ],
+        [
+          6.84446999774423e-05,
+          -0.0002888349699364253,
+          1.0
+        ]
+      ],
+      "frame_index": 36,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.1406073833261836,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000036_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000037.jpg",
+      "homography": [
+        [
+          1.3913591901191205,
+          0.07320641150672139,
+          -2300.416142513088
+        ],
+        [
+          -0.06515954869580683,
+          0.19714017016513694,
+          601.4439884460921
+        ],
+        [
+          6.740133744797359e-05,
+          -0.0002815651932114978,
+          1.0
+        ]
+      ],
+      "frame_index": 37,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.18018799335901622,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000037_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000038.jpg",
+      "homography": [
+        [
+          1.349522646943836,
+          0.03292531192620563,
+          -2188.3001989012487
+        ],
+        [
+          -0.064946693702083,
+          0.18006177790532504,
+          594.2980137597146
+        ],
+        [
+          6.0738705690083545e-05,
+          -0.0002930893703964394,
+          1.0
+        ]
+      ],
+      "frame_index": 38,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.17929048965280203,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000038_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000039.jpg",
+      "homography": [
+        [
+          1.6355987062296893,
+          0.0812217991651168,
+          -2957.3730035858575
+        ],
+        [
+          -0.089581166496063,
+          0.2042225978528929,
+          666.5099665289845
+        ],
+        [
+          6.427185476408222e-05,
+          -0.0002733864100391736,
+          1.0
+        ]
+      ],
+      "frame_index": 39,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.1409291008656161,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000039_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000040.jpg",
+      "homography": [
+        [
+          1.8056270358241577,
+          0.12838983211556407,
+          -3378.772907206448
+        ],
+        [
+          -0.08846705277216632,
+          0.22965405255746632,
+          672.0232245474549
+        ],
+        [
+          7.250185041516059e-05,
+          -0.0002575209103351587,
+          1.0
+        ]
+      ],
+      "frame_index": 40,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.12801668313644302,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000040_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000041.jpg",
+      "homography": [
+        [
+          1.2357753412852375,
+          0.06485419227840478,
+          -1805.686476808642
+        ],
+        [
+          -0.051824106224795184,
+          0.2013100767341242,
+          555.9440523243912
+        ],
+        [
+          5.8140087461550096e-05,
+          -0.00027018244894215135,
+          1.0
+        ]
+      ],
+      "frame_index": 41,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.19832154025951548,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000041_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000042.jpg",
+      "homography": [
+        [
+          1.343249773860199,
+          -0.005854049372861073,
+          -2035.0184948101942
+        ],
+        [
+          -0.04886221757538227,
+          0.17932349792832705,
+          556.4704357821809
+        ],
+        [
+          6.746034869666634e-05,
+          -0.0003027721703874866,
+          1.0
+        ]
+      ],
+      "frame_index": 42,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24943847347897896,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000042_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000043.jpg",
+      "homography": [
+        [
+          1.3433457912883087,
+          -0.0034462033143419345,
+          -2021.8484597640254
+        ],
+        [
+          -0.048008164413977344,
+          0.18205215237881414,
+          550.3136570321026
+        ],
+        [
+          6.349643913241071e-05,
+          -0.00029718358779825746,
+          1.0
+        ]
+      ],
+      "frame_index": 43,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2351923014742566,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000043_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000044.jpg",
+      "homography": [
+        [
+          1.3104452977183927,
+          0.01045353078695184,
+          -1922.4339251252895
+        ],
+        [
+          -0.04904573158030779,
+          0.18950957912482322,
+          549.1134806078043
+        ],
+        [
+          5.804039131642323e-05,
+          -0.0002845791077542314,
+          1.0
+        ]
+      ],
+      "frame_index": 44,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.265823430106968,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000044_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000045.jpg",
+      "homography": [
+        [
+          1.122758951921856,
+          -0.010217635053796744,
+          -1559.7840188052965
+        ],
+        [
+          -0.057854287515391935,
+          0.1670085263434136,
+          528.9522024880835
+        ],
+        [
+          1.2311544414415626e-05,
+          -0.00026317465846725644,
+          1.0
+        ]
+      ],
+      "frame_index": 45,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2674145521879409,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000045_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000046.jpg",
+      "homography": [
+        [
+          1.1772670515802675,
+          -0.07728667792553304,
+          -1608.3999663325444
+        ],
+        [
+          -0.04937818454260345,
+          0.15346079921638708,
+          523.854352587039
+        ],
+        [
+          2.902767179519408e-05,
+          -0.000305177234667793,
+          1.0
+        ]
+      ],
+      "frame_index": 46,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.22225574167085205,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000046_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000047.jpg",
+      "homography": [
+        [
+          1.1601105515982535,
+          -0.10217362329770416,
+          -1544.6670814392842
+        ],
+        [
+          -0.04757557011811416,
+          0.14607680592678934,
+          515.604342521568
+        ],
+        [
+          2.4436248242621434e-05,
+          -0.0003086505812040319,
+          1.0
+        ]
+      ],
+      "frame_index": 47,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.20751601264540964,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000047_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000048.jpg",
+      "homography": [
+        [
+          1.1656033680860098,
+          -0.1149353286328433,
+          -1516.9272707026564
+        ],
+        [
+          -0.04522999291997136,
+          0.14793270696183555,
+          510.86916640247546
+        ],
+        [
+          2.5279915497847002e-05,
+          -0.00030931682618821183,
+          1.0
+        ]
+      ],
+      "frame_index": 48,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.203143692057344,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000048_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000049.jpg",
+      "homography": [
+        [
+          1.2425970528410701,
+          0.002387403995899047,
+          -1724.0926502553514
+        ],
+        [
+          -0.051971922688013324,
+          0.1670641114581403,
+          529.5919264556611
+        ],
+        [
+          2.475742798378189e-05,
+          -0.00027591342956330027,
+          1.0
+        ]
+      ],
+      "frame_index": 49,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.22280509173406224,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000049_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000050.jpg",
+      "homography": [
+        [
+          1.4594058519963389,
+          -0.005219682540439165,
+          -1973.4083618172858
+        ],
+        [
+          -0.019326138141638964,
+          0.22777239433487906,
+          507.1510303886278
+        ],
+        [
+          8.196495548102765e-05,
+          -0.0002777200096685917,
+          1.0
+        ]
+      ],
+      "frame_index": 50,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2085507479791275,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000050_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000051.jpg",
+      "homography": [
+        [
+          1.3777602904675665,
+          -0.02174863805603621,
+          -1804.7707672384317
+        ],
+        [
+          -0.02108401725113551,
+          0.20281161336337933,
+          496.3186929264108
+        ],
+        [
+          6.27169396871533e-05,
+          -0.00028842424242109753,
+          1.0
+        ]
+      ],
+      "frame_index": 51,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.19119044327714993,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000051_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000052.jpg",
+      "homography": [
+        [
+          1.265532329916939,
+          -0.05128060967419956,
+          -1592.607473364091
+        ],
+        [
+          -0.006136398103704201,
+          0.10674976980042059,
+          471.91993831870747
+        ],
+        [
+          5.097413058467302e-05,
+          -0.00035632139144027374,
+          1.0
+        ]
+      ],
+      "frame_index": 52,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.15405233030957516,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000052_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000053.jpg",
+      "homography": [
+        [
+          3.7845862408016093,
+          -0.08606739794357732,
+          -4754.103362926081
+        ],
+        [
+          0.5831691233386899,
+          0.7499178670787789,
+          -239.1943427309644
+        ],
+        [
+          0.0007387415443979757,
+          -0.00023102991639323254,
+          1.0
+        ]
+      ],
+      "frame_index": 53,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.09090007203902115,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000053_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000077.jpg",
+      "homography": [
+        [
+          1.074898483865355,
+          -0.5425511826488345,
+          156.33975661606283
+        ],
+        [
+          0.05723082583713632,
+          0.08768799628779553,
+          351.0552936864177
+        ],
+        [
+          -2.224823392991928e-07,
+          -0.000320257279751378,
+          1.0
+        ]
+      ],
+      "frame_index": 77,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.13278224595497884,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000077_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000078.jpg",
+      "homography": [
+        [
+          1.0736748861761563,
+          -0.43808788989743125,
+          141.80938149170694
+        ],
+        [
+          0.03217163484628038,
+          0.15475051589847477,
+          370.49102423520446
+        ],
+        [
+          -2.6870231628581656e-05,
+          -0.0002469327391808733,
+          1.0
+        ]
+      ],
+      "frame_index": 78,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.26095061298101346,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000078_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000079.jpg",
+      "homography": [
+        [
+          1.034770373641501,
+          -0.43181667853605116,
+          194.09668551790023
+        ],
+        [
+          0.028835262092314445,
+          0.1616903726910113,
+          364.8417295536212
+        ],
+        [
+          -4.508973545375808e-05,
+          -0.0002368950391608384,
+          1.0
+        ]
+      ],
+      "frame_index": 79,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2814010961156357,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000079_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000080.jpg",
+      "homography": [
+        [
+          1.22442114406137,
+          -0.4836917238117583,
+          226.10429939006255
+        ],
+        [
+          0.06092294289873583,
+          0.15435931618615428,
+          375.8498362088756
+        ],
+        [
+          5.850003262131523e-05,
+          -0.0002599328419312907,
+          1.0
+        ]
+      ],
+      "frame_index": 80,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.18478502939104033,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000080_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000081.jpg",
+      "homography": [
+        [
+          1.0393477203088524,
+          -0.44699227858331664,
+          274.37066411968175
+        ],
+        [
+          0.025571660180509492,
+          0.15487795473252136,
+          373.472639928469
+        ],
+        [
+          -4.3937186072769886e-05,
+          -0.00023494404698933298,
+          1.0
+        ]
+      ],
+      "frame_index": 81,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2602343131923396,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000081_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000082.jpg",
+      "homography": [
+        [
+          1.0554578027724528,
+          -0.46953973872479693,
+          338.6850761101225
+        ],
+        [
+          0.05539164989293998,
+          0.15522449585051293,
+          351.0253476662535
+        ],
+        [
+          -2.3741579295381543e-05,
+          -0.00024415466908695376,
+          1.0
+        ]
+      ],
+      "frame_index": 82,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.22737969282290588,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000082_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000083.jpg",
+      "homography": [
+        [
+          1.0438388815917747,
+          -0.47457529766753387,
+          382.52933105604103
+        ],
+        [
+          0.06911466623830412,
+          0.16527246260887452,
+          347.9671438331922
+        ],
+        [
+          4.7886479021565974e-06,
+          -0.00024136773644230951,
+          1.0
+        ]
+      ],
+      "frame_index": 83,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2589667531952115,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000083_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000084.jpg",
+      "homography": [
+        [
+          1.0008935340179899,
+          -0.47255901953855567,
+          415.5826536879981
+        ],
+        [
+          0.06447993980482548,
+          0.14573536672682194,
+          361.30346558513696
+        ],
+        [
+          -3.8623799596635805e-07,
+          -0.0002554919155841892,
+          1.0
+        ]
+      ],
+      "frame_index": 84,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24493459296836495,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000084_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000085.jpg",
+      "homography": [
+        [
+          0.9858792279242635,
+          -0.46939195922872323,
+          444.52130107992866
+        ],
+        [
+          0.05220616551517172,
+          0.13392129536857506,
+          375.518144762013
+        ],
+        [
+          -1.7536616913758e-05,
+          -0.0002609602049952346,
+          1.0
+        ]
+      ],
+      "frame_index": 85,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2817533325647815,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000085_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000086.jpg",
+      "homography": [
+        [
+          0.9484514235272767,
+          -0.4805482468944063,
+          476.6301031822367
+        ],
+        [
+          0.05310300545936013,
+          0.11109125155899403,
+          388.2466895352107
+        ],
+        [
+          -1.9417942424316277e-05,
+          -0.00028692526259994,
+          1.0
+        ]
+      ],
+      "frame_index": 86,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2500423883413152,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000086_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000087.jpg",
+      "homography": [
+        [
+          0.9387924709020754,
+          -0.49221831003614885,
+          506.80455813404143
+        ],
+        [
+          0.05381911965650642,
+          0.1027417596432569,
+          399.93846879030593
+        ],
+        [
+          -2.0387721768055835e-05,
+          -0.00029318000632958793,
+          1.0
+        ]
+      ],
+      "frame_index": 87,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24390632146247215,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000087_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000088.jpg",
+      "homography": [
+        [
+          0.9779575668015662,
+          -0.5084224681231855,
+          550.0443818046379
+        ],
+        [
+          0.0692818268051932,
+          0.14241106280999166,
+          398.29446363250116
+        ],
+        [
+          -1.8785325210412677e-05,
+          -0.00024289630881632016,
+          1.0
+        ]
+      ],
+      "frame_index": 88,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.254510984430647,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000088_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000089.jpg",
+      "homography": [
+        [
+          0.9791375595446989,
+          -0.5169714951239097,
+          574.6885178298949
+        ],
+        [
+          0.07182511823247649,
+          0.14706936884147503,
+          404.8445145388624
+        ],
+        [
+          -1.4999008738275486e-05,
+          -0.00023700491119718552,
+          1.0
+        ]
+      ],
+      "frame_index": 89,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.23697407685695923,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000089_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000090.jpg",
+      "homography": [
+        [
+          0.9501248395066335,
+          -0.5061737811987833,
+          580.5980666750069
+        ],
+        [
+          0.04918395904841479,
+          0.13041550098652008,
+          420.1841065499164
+        ],
+        [
+          -3.832741068540811e-05,
+          -0.0002461596556339609,
+          1.0
+        ]
+      ],
+      "frame_index": 90,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.25692862386290155,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000090_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000091.jpg",
+      "homography": [
+        [
+          0.9557103701260525,
+          -0.5232409009227176,
+          619.2161000777929
+        ],
+        [
+          0.07526559717955879,
+          0.1350881830636354,
+          417.6108222215459
+        ],
+        [
+          -1.321280835753562e-05,
+          -0.00024483488694880193,
+          1.0
+        ]
+      ],
+      "frame_index": 91,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24324490297303697,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000091_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000092.jpg",
+      "homography": [
+        [
+          0.9541649648772971,
+          -0.5169447726471145,
+          627.7690727446584
+        ],
+        [
+          0.052537172356764306,
+          0.11736251679470665,
+          430.7148995500304
+        ],
+        [
+          -3.735676732115433e-05,
+          -0.00025514972645647666,
+          1.0
+        ]
+      ],
+      "frame_index": 92,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.26832658593055686,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000092_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000093.jpg",
+      "homography": [
+        [
+          0.9749189095001912,
+          -0.5305454472079072,
+          657.0987090093541
+        ],
+        [
+          0.06958699147354704,
+          0.1325023002990273,
+          430.16819480231237
+        ],
+        [
+          -2.2017267983703922e-05,
+          -0.0002416624501858896,
+          1.0
+        ]
+      ],
+      "frame_index": 93,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.28194605702339054,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000093_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000094.jpg",
+      "homography": [
+        [
+          0.9626284454812344,
+          -0.525787711608796,
+          663.6590487643691
+        ],
+        [
+          0.058228845883518655,
+          0.12318745170206928,
+          439.6648107279603
+        ],
+        [
+          -3.3694608174466815e-05,
+          -0.0002468499231625667,
+          1.0
+        ]
+      ],
+      "frame_index": 94,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2819431080813543,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000094_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000095.jpg",
+      "homography": [
+        [
+          0.9820525998980487,
+          -0.5392980604658834,
+          689.9466941461271
+        ],
+        [
+          0.07851689190219188,
+          0.12771995868725367,
+          438.2732668723288
+        ],
+        [
+          -1.0804911432185853e-05,
+          -0.00024436836366800117,
+          1.0
+        ]
+      ],
+      "frame_index": 95,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.26016088012128685,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000095_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000096.jpg",
+      "homography": [
+        [
+          0.9615096517809891,
+          -0.5380194225241433,
+          696.7195344422452
+        ],
+        [
+          0.07010071066809082,
+          0.12508274277301543,
+          441.80936901045123
+        ],
+        [
+          -2.0169175427521142e-05,
+          -0.0002457621243684225,
+          1.0
+        ]
+      ],
+      "frame_index": 96,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.23348724766324155,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000096_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000097.jpg",
+      "homography": [
+        [
+          0.3213178972650987,
+          -0.5443883117931739,
+          712.4442692597606
+        ],
+        [
+          0.025171038366319256,
+          0.12702506911597558,
+          444.8256049649292
+        ],
+        [
+          -6.11351811388572e-06,
+          -0.0002429970174092989,
+          1.0
+        ]
+      ],
+      "frame_index": 97,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2442032161302863,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000097_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000098.jpg",
+      "homography": [
+        [
+          0.9625713380675832,
+          -0.5460098629244718,
+          720.4742731225416
+        ],
+        [
+          0.07158188428161823,
+          0.11914081481614772,
+          445.47808478980096
+        ],
+        [
+          -2.443243011720097e-05,
+          -0.00025030832201331063,
+          1.0
+        ]
+      ],
+      "frame_index": 98,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.25308693835873164,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000098_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000099.jpg",
+      "homography": [
+        [
+          0.9668795245111468,
+          -0.5502645244978448,
+          729.8294031966053
+        ],
+        [
+          0.06633720944666915,
+          0.12325032551064945,
+          446.81530203847853
+        ],
+        [
+          -2.93413058904439e-05,
+          -0.00024614072627199724,
+          1.0
+        ]
+      ],
+      "frame_index": 99,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.25308421168599027,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000099_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000100.jpg",
+      "homography": [
+        [
+          0.23932109071672641,
+          -0.5540113131484916,
+          740.1023420828903
+        ],
+        [
+          0.01844083953675951,
+          0.12347066175528262,
+          450.3785915787593
+        ],
+        [
+          -5.573353459646901e-06,
+          -0.00024538261130110304,
+          1.0
+        ]
+      ],
+      "frame_index": 100,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.272933307881939,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000100_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000101.jpg",
+      "homography": [
+        [
+          0.968855515022496,
+          -0.5533748374403666,
+          745.2761682186098
+        ],
+        [
+          0.06305869885237882,
+          0.11841149409282621,
+          450.8300007108604
+        ],
+        [
+          -3.436121101875498e-05,
+          -0.0002499012837477911,
+          1.0
+        ]
+      ],
+      "frame_index": 101,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.2655386042532238,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000101_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000102.jpg",
+      "homography": [
+        [
+          0.9710876231786043,
+          -0.5587428557580622,
+          757.9989605792343
+        ],
+        [
+          0.06940050100095443,
+          0.12578994411309094,
+          449.87867799279695
+        ],
+        [
+          -2.9988644044983355e-05,
+          -0.00024366412544231305,
+          1.0
+        ]
+      ],
+      "frame_index": 102,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.23904672133191326,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000102_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000103.jpg",
+      "homography": [
+        [
+          0.337685636315267,
+          -0.5639773675928516,
+          767.714737191366
+        ],
+        [
+          0.027910896785442705,
+          0.12734328565845524,
+          451.4132996344893
+        ],
+        [
+          -6.7705165002418575e-06,
+          -0.00024320248679399875,
+          1.0
+        ]
+      ],
+      "frame_index": 103,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24562353638792314,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000103_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000104.jpg",
+      "homography": [
+        [
+          0.9710143722071934,
+          -0.5614223216985629,
+          767.7515033877722
+        ],
+        [
+          0.06908839060795803,
+          0.11031767245356511,
+          457.24188994535064
+        ],
+        [
+          -3.0401377801570718e-05,
+          -0.0002569367315227017,
+          1.0
+        ]
+      ],
+      "frame_index": 104,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24032951830094443,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000104_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames_15fps_0051_0058/frame_000105.jpg",
+      "homography": [
+        [
+          0.9935062975465072,
+          -0.5676857222137168,
+          777.8875935723557
+        ],
+        [
+          0.07214702248882579,
+          0.1203946744060661,
+          455.97402608852417
+        ],
+        [
+          -2.733154695009541e-05,
+          -0.0002477879329010251,
+          1.0
+        ]
+      ],
+      "frame_index": 105,
+      "source_name": "caitlin_15fps_1",
+      "score": 0.24908719833919335,
+      "refinement_json": "tests/output/0008_marking_refinement_current_caitlin_15fps_1/frame_000105_refinement.json"
+    }
+  ],
+  "skipped_score_nonfinite": [
+    "frame_000054_refinement.json",
+    "frame_000055_refinement.json",
+    "frame_000056_refinement.json",
+    "frame_000057_refinement.json",
+    "frame_000058_refinement.json",
+    "frame_000059_refinement.json",
+    "frame_000060_refinement.json",
+    "frame_000061_refinement.json",
+    "frame_000062_refinement.json",
+    "frame_000063_refinement.json",
+    "frame_000064_refinement.json",
+    "frame_000065_refinement.json",
+    "frame_000066_refinement.json",
+    "frame_000067_refinement.json",
+    "frame_000068_refinement.json",
+    "frame_000069_refinement.json",
+    "frame_000070_refinement.json",
+    "frame_000071_refinement.json",
+    "frame_000072_refinement.json",
+    "frame_000073_refinement.json",
+    "frame_000074_refinement.json",
+    "frame_000075_refinement.json",
+    "frame_000076_refinement.json"
+  ],
+  "missing_images": []
+}

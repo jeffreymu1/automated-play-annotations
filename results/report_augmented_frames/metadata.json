@@ -1,0 +1,182 @@
+[
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_000.png",
+    "pan_dataset_index": 115,
+    "source": "midcourt:KS-FR-VICHY:camcourt1_1525807977596_0+camcourt2_1525804897609_0:pan=0.796",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_001.png",
+    "pan_dataset_index": 97,
+    "source": "midcourt:KS-FR-STCHAMOND:camcourt1_1513714454258_0+camcourt2_1513715574505_0:pan=0.578",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_002.png",
+    "pan_dataset_index": 33,
+    "source": "midcourt:KS-FR-GRAVELINES:camcourt1_1512744357050_0+camcourt2_1512745077089_0:pan=0.300",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_003.png",
+    "pan_dataset_index": 56,
+    "source": "midcourt:KS-FR-MONACO:camcourt1_1512589161619_0+camcourt2_1512590601632_0:pan=0.006",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_004.png",
+    "pan_dataset_index": 74,
+    "source": "midcourt:KS-FR-NANTES:camcourt1_1513369179632_0+camcourt2_1513368339229_0:pan=0.718",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_005.png",
+    "pan_dataset_index": 98,
+    "source": "midcourt:KS-FR-STCHAMOND:camcourt1_1512763413947_0+camcourt2_1513715574505_0:pan=0.741",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_006.png",
+    "pan_dataset_index": 100,
+    "source": "midcourt:KS-FR-STCHAMOND:camcourt1_1513714454258_0+camcourt2_1513714734349_0:pan=0.092",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_007.png",
+    "pan_dataset_index": 15,
+    "source": "midcourt:KS-FR-BOURGEB:camcourt1_1512418352502_0+camcourt2_1512420871982_0:pan=0.813",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_008.png",
+    "pan_dataset_index": 107,
+    "source": "midcourt:KS-FR-STRASBOURG:camcourt1_1513801886622_0+camcourt2_1513802446570_0:pan=0.002",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_009.png",
+    "pan_dataset_index": 85,
+    "source": "midcourt:KS-FR-POITIERS:camcourt1_1512760482343_0+camcourt2_1512761562083_0:pan=0.699",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_010.png",
+    "pan_dataset_index": 19,
+    "source": "midcourt:KS-FR-CAEN:camcourt1_1513369713895_0+camcourt2_1513716153976_0:pan=0.826",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_011.png",
+    "pan_dataset_index": 22,
+    "source": "midcourt:KS-FR-CAEN:camcourt1_1513367753466_0+camcourt2_1513365794090_0:pan=0.454",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_012.png",
+    "pan_dataset_index": 1,
+    "source": "midcourt:KS-FR-BLOIS:camcourt1_1513710808980_0+camcourt2_1513714728681_0:pan=0.426",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_013.png",
+    "pan_dataset_index": 0,
+    "source": "midcourt:KS-FR-BLOIS:camcourt1_1513710808980_0+camcourt2_1513710529019_0:pan=0.234",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_014.png",
+    "pan_dataset_index": 111,
+    "source": "midcourt:KS-FR-STRASBOURG:camcourt1_1513798527129_0+camcourt2_1513801886622_0:pan=0.824",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_015.png",
+    "pan_dataset_index": 31,
+    "source": "midcourt:KS-FR-FOS:camcourt1_1513710793912_0+camcourt2_1513710233743_0:pan=0.045",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_016.png",
+    "pan_dataset_index": 58,
+    "source": "midcourt:KS-FR-MONACO:camcourt1_1512589881619_0+camcourt2_1512594561645_0:pan=0.022",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_017.png",
+    "pan_dataset_index": 41,
+    "source": "midcourt:KS-FR-LEMANS:camcourt1_1513014904352_0+camcourt2_1513011664105_0:pan=0.145",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_018.png",
+    "pan_dataset_index": 110,
+    "source": "midcourt:KS-FR-STRASBOURG:camcourt1_1513799926388_0+camcourt2_1513798527129_0:pan=0.090",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_019.png",
+    "pan_dataset_index": 26,
+    "source": "midcourt:KS-FR-FOS:camcourt1_1513710513951_0+camcourt2_1513710793912_0:pan=0.164",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_020.png",
+    "pan_dataset_index": 42,
+    "source": "midcourt:KS-FR-LEMANS:camcourt1_1513022103206_0+camcourt2_1513022463024_0:pan=0.483",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_021.png",
+    "pan_dataset_index": 61,
+    "source": "midcourt:KS-FR-MONACO:camcourt1_1512594561645_0+camcourt2_1512590601632_0:pan=0.739",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_022.png",
+    "pan_dataset_index": 88,
+    "source": "midcourt:KS-FR-ROANNE:camcourt1_1513710261860_0+camcourt2_1513713901197_0:pan=0.020",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_023.png",
+    "pan_dataset_index": 70,
+    "source": "midcourt:KS-FR-NANCY:camcourt1_1513711393208_0+camcourt2_1513713912480_0:pan=0.700",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_024.png",
+    "pan_dataset_index": 35,
+    "source": "midcourt:KS-FR-GRAVELINES:camcourt1_1512763438299_0+camcourt2_1512765958260_0:pan=0.925",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_025.png",
+    "pan_dataset_index": 16,
+    "source": "midcourt:KS-FR-CAEN:camcourt1_1513710553937_0+camcourt2_1513716993677_0:pan=0.517",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_026.png",
+    "pan_dataset_index": 104,
+    "source": "midcourt:KS-FR-STRASBOURG:camcourt1_1513799086934_0+camcourt2_1513803006284_0:pan=0.393",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_027.png",
+    "pan_dataset_index": 113,
+    "source": "midcourt:KS-FR-VICHY:camcourt1_1525807977596_0+camcourt2_1525807977596_0:pan=0.397",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_028.png",
+    "pan_dataset_index": 105,
+    "source": "midcourt:KS-FR-STRASBOURG:camcourt1_1513798527129_0+camcourt2_1513801606726_0:pan=0.207",
+    "score_bar": true
+  },
+  {
+    "output": "tests/output/report_augmented_frames/augmented_frame_029.png",
+    "pan_dataset_index": 62,
+    "source": "midcourt:KS-FR-MONACO:camcourt1_1512594561645_0+camcourt2_1512594561645_0:pan=0.304",
+    "score_bar": true
+  }
+]

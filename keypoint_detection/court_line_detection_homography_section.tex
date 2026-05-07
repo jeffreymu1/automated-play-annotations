@@ -1,0 +1,28 @@
+\subsection{Court Line Detection and Homography Estimation}
+
+Our court localization pipeline separates visual detection from geometric estimation.  First, a dense neural network predicts image-space evidence for FIBA court markings: a binary line heatmap, a marking-class distribution, a court mask, and a left/right court-side map.  These predictions convert the raw broadcast image into a structured intermediate representation that is easier to match against the known court template.  Second, we fit geometric primitives to the predicted marking evidence and estimate a planar homography from court coordinates, measured in centimeters, to image pixels.  The homography is selected by scoring the projected full-court marking template against the network evidence rather than by relying only on the primitives used to initialize it.
+
+\subsubsection{Line Detection Network}
+
+The line detector is a U-Net-style dense prediction model with a frozen DINOv3 ConvNeXt backbone.  Multi-scale backbone features are projected into a shared decoder for local court-marking prediction, while a separate lightweight layout decoder uses deeper features for global court structure.  The local decoder outputs a lineness logit and per-pixel marking-class logits.  The layout decoder outputs a court-mask logit and a court-side logit, where the side target indicates which half of the projected court a pixel belongs to.
+
+Training targets are rendered directly from the DeepSport camera calibration and a metric FIBA court model.  Each physical marking is sampled in world coordinates, projected into the image, transformed consistently with crop and resize augmentation, and rasterized into dense supervision.  The marking taxonomy uses shared left/right classes for repeated structures such as baselines, lane lines, foul lines, three-point arcs, and free-throw circles, plus unique classes for the far sideline, near sideline, and half-court line.  The lineness head is trained with a Dice and focal binary loss, the class head with cross entropy gated by the line target, the court-mask head with binary cross entropy, and the side head with a court-mask-weighted binary cross entropy.  This combination encourages the model to localize thin markings precisely while also learning the broader visible court region needed to suppress off-court and score-bar false positives.
+
+\subsubsection{Homography Linear DLT with RANSAC}
+
+Given the network outputs, we form class-specific evidence maps by multiplying lineness and class probability, optionally weighted by the predicted court mask and court side.  Connected components and weighted primitive fitting produce candidate image lines for straight markings and conic fits for curved markings.  Shared semantic classes are split back into side-specific geometric names using the court-side prediction, so the estimator can reason separately about, for example, the left and right baselines even though they share a network class.
+
+Each homography candidate is estimated with a normalized linear DLT system using both line and point correspondences.  For a world line $\ell_w$ and an observed image line $\ell_i$, the homography $H$ must satisfy
+\[
+    \ell_i \sim H^{-T}\ell_w,
+\]
+which contributes two homogeneous linear constraints on the entries of $H$.  Point correspondences, such as intersections between fitted court lines or curve-line intersection points, satisfy
+\[
+    \mathbf{x}_i \sim H\mathbf{x}_w.
+\]
+The DLT system is solved by SVD after Hartley normalization of world and image coordinates.  Curve-derived point constraints are upweighted because arcs and circles provide strong geometric information even when only short straight segments are visible.
+
+To handle false positive and missing markings, candidate homographies are generated in a RANSAC-style loop over plausible primitive subsets.  The current CPU path enumerates the small combinatorial space of top primitive candidates while allowing a bounded number of primitives to be excluded; the Torch path supports batched randomized sampling.  After an initial DLT solve, the system refits using additional point correspondences implied by the candidate homography and rejects geometrically degenerate projections.  Candidates are then scored by projecting the full sampled FIBA marking template into the image and reading max-pooled network evidence near each projected sample.  The score is length-weighted in world space and multiplied by predicted court-mask and court-side probabilities when applicable, so unsupported long markings are penalized more than short or ambiguous structures.  The selected homography is therefore the one that best explains the complete visible court layout, not merely the one that fits a minimal subset of detected primitives.
+
+\paragraph{Proposed visuals.}
+Figure~X can show the method flow: input frame, network outputs, fitted primitives, and final projected template overlay.  A second schematic can illustrate the DLT correspondences by drawing a few world-template lines and intersections matched to image-space fitted lines.  A compact qualitative panel can show the predicted lineness, marking classes, court mask, and court-side map for one representative frame; this should be presented as an intermediate-representation visualization rather than a final performance result.

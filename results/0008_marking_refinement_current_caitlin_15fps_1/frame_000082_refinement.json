@@ -1,0 +1,417 @@
+{
+  "success": true,
+  "message": "ok (cpu systematic dlt, attempts=37, max_excluded=2)",
+  "score": 0.22737969282290588,
+  "homography": [
+    [
+      1.0554578027724528,
+      -0.46953973872479693,
+      338.6850761101225
+    ],
+    [
+      0.05539164989293998,
+      0.15522449585051293,
+      351.0253476662535
+    ],
+    [
+      -2.3741579295381543e-05,
+      -0.00024415466908695376,
+      1.0
+    ]
+  ],
+  "candidate_pixels": {
+    "sideline_far": 28552,
+    "sideline_near": 9858,
+    "baseline": 9726,
+    "baseline_left": 9726,
+    "baseline_right": 0,
+    "halfcourt": 6327,
+    "lane_far": 9774,
+    "lane_left_far": 9774,
+    "lane_right_far": 0,
+    "lane_near": 14744,
+    "lane_left_near": 14744,
+    "lane_right_near": 0,
+    "foul": 0,
+    "foul_left": 0,
+    "foul_right": 0,
+    "three_point_arc": 31210,
+    "three_point_arc_left": 31210,
+    "three_point_arc_right": 0,
+    "free_throw_circle": 22328,
+    "free_throw_circle_left": 22328,
+    "free_throw_circle_right": 0
+  },
+  "geometry_masses": {
+    "sideline_far": 25341.625,
+    "sideline_near": 8527.486328125,
+    "baseline_left": 8532.4287109375,
+    "baseline_right": 0.0,
+    "halfcourt": 5677.0185546875,
+    "lane_left_far": 8034.0517578125,
+    "lane_right_far": 0.0,
+    "lane_left_near": 13330.123046875,
+    "lane_right_near": 0.0,
+    "foul_left": 0.0,
+    "foul_right": 0.0,
+    "three_point_arc_left": 27689.865234375,
+    "three_point_arc_right": 0.0,
+    "free_throw_circle_left": 19990.169921875,
+    "free_throw_circle_right": 0.0
+  },
+  "per_geometry_scores": {
+    "sideline_far": 0.6031747872882647,
+    "sideline_near": 0.1925018690409813,
+    "baseline_left": 0.7456577109577988,
+    "baseline_right": 0.0,
+    "halfcourt": 0.2771450785217539,
+    "lane_left_far": 0.5605271964237608,
+    "lane_left_near": 0.9256534958717074,
+    "foul_left": 1.6550406710141235e-05,
+    "lane_right_far": 0.0,
+    "lane_right_near": 0.0,
+    "foul_right": 0.0,
+    "three_point_arc_left": 0.47126782167409176,
+    "three_point_arc_right": 0.0,
+    "free_throw_circle_left": 0.6468896651913274,
+    "free_throw_circle_right": 0.0
+  },
+  "point_correspondences": [
+    {
+      "name": "sideline_far__baseline_left",
+      "world": [
+        0.0,
+        -0.0
+      ],
+      "image": [
+        342.93266562802705,
+        347.2383155534635
+      ]
+    },
+    {
+      "name": "sideline_far__halfcourt",
+      "world": [
+        1400.0,
+        -0.0
+      ],
+      "image": [
+        1878.5749512556872,
+        449.0429958702183
+      ]
+    },
+    {
+      "name": "baseline_left__lane_left_far",
+      "world": [
+        0.0,
+        505.0
+      ],
+      "image": [
+        111.83797514732458,
+        497.65934875998846
+      ]
+    },
+    {
+      "name": "baseline_left__lane_left_near",
+      "world": [
+        0.0,
+        995.0
+      ],
+      "image": [
+        -167.13661958471704,
+        679.2457222533661
+      ]
+    },
+    {
+      "name": "halfcourt__lane_left_far",
+      "world": [
+        1400.0,
+        505.0
+      ],
+      "image": [
+        1872.7296055129505,
+        604.9402998853202
+      ]
+    },
+    {
+      "name": "halfcourt__lane_left_near",
+      "world": [
+        1400.0,
+        995.0
+      ],
+      "image": [
+        1865.3240063827961,
+        802.4500777187692
+      ]
+    },
+    {
+      "name": "free_throw_circle_left__baseline_tangent_apex",
+      "world": [
+        400.0,
+        750.0
+      ],
+      "image": [
+        504.02300224918025,
+        599.4849280926962
+      ]
+    }
+  ],
+  "selected_lines": {
+    "sideline_far": {
+      "class_name": "sideline_far",
+      "geometry_name": "sideline_far",
+      "line_homog": [
+        0.0661493252784588,
+        -0.9978097347516733,
+        323.79300709078194
+      ],
+      "p0": [
+        371.23663747144786,
+        349.1147140039243
+      ],
+      "p1": [
+        1659.8579140443492,
+        434.5432531491932
+      ],
+      "support": 26593,
+      "score": 23594.710338115692
+    },
+    "baseline_left": {
+      "class_name": "baseline",
+      "geometry_name": "baseline_left",
+      "line_homog": [
+        -0.5455223163894296,
+        -0.8380962965680682,
+        478.09656841089503
+      ],
+      "p0": [
+        26.899070289525014,
+        552.946632953166
+      ],
+      "p1": [
+        292.75384473589196,
+        379.9000355954929
+      ],
+      "support": 8893,
+      "score": 7993.038246691227
+    },
+    "halfcourt": {
+      "class_name": "halfcourt",
+      "geometry_name": "halfcourt",
+      "line_homog": [
+        -0.9992978084831573,
+        -0.03746851959657653,
+        1894.0808081516311
+      ],
+      "p0": [
+        1855.4251956923144,
+        1066.4546323714044
+      ],
+      "p1": [
+        1863.6340244729363,
+        847.5224541318828
+      ],
+      "support": 6327,
+      "score": 5677.01850938797
+    },
+    "lane_left_far": {
+      "class_name": "lane_far",
+      "geometry_name": "lane_left_far",
+      "line_homog": [
+        0.060811466884088665,
+        -0.9981492701472087,
+        489.93728442466266
+      ],
+      "p0": [
+        407.40309555057723,
+        515.6664235223067
+      ],
+      "p1": [
+        794.3709631375839,
+        539.242139468583
+      ],
+      "support": 8445,
+      "score": 7228.168651342392
+    },
+    "lane_left_near": {
+      "class_name": "lane_near",
+      "geometry_name": "lane_left_near",
+      "line_homog": [
+        0.0605072558995464,
+        -0.9981677574353456,
+        688.1141575405917
+      ],
+      "p0": [
+        34.1637776871122,
+        691.4482148300671
+      ],
+      "p1": [
+        606.6226985748814,
+        726.1497148135286
+      ],
+      "support": 14744,
+      "score": 13330.122888684273
+    }
+  },
+  "line_fits": {
+    "sideline_far": [
+      {
+        "geometry_name": "sideline_far",
+        "p0": [
+          371.23663747144786,
+          349.1147140039243
+        ],
+        "p1": [
+          1659.8579140443492,
+          434.5432531491932
+        ],
+        "support": 26593,
+        "score": 23594.710338115692
+      }
+    ],
+    "sideline_near": [
+      {
+        "geometry_name": "sideline_near",
+        "p0": [
+          21.25526375887176,
+          987.4699079220079
+        ],
+        "p1": [
+          1302.062087938504,
+          935.3250330058864
+        ],
+        "support": 8637,
+        "score": 7747.802768200636
+      }
+    ],
+    "baseline": [
+      {
+        "geometry_name": "baseline_left",
+        "p0": [
+          26.899070289525014,
+          552.946632953166
+        ],
+        "p1": [
+          292.75384473589196,
+          379.9000355954929
+        ],
+        "support": 8893,
+        "score": 7993.038246691227
+      }
+    ],
+    "halfcourt": [
+      {
+        "geometry_name": "halfcourt",
+        "p0": [
+          1855.4251956923144,
+          1066.4546323714044
+        ],
+        "p1": [
+          1863.6340244729363,
+          847.5224541318828
+        ],
+        "support": 6327,
+        "score": 5677.01850938797
+      }
+    ],
+    "lane_far": [
+      {
+        "geometry_name": "lane_left_far",
+        "p0": [
+          407.40309555057723,
+          515.6664235223067
+        ],
+        "p1": [
+          794.3709631375839,
+          539.242139468583
+        ],
+        "support": 8445,
+        "score": 7228.168651342392
+      }
+    ],
+    "lane_near": [
+      {
+        "geometry_name": "lane_left_near",
+        "p0": [
+          34.1637776871122,
+          691.4482148300671
+        ],
+        "p1": [
+          606.6226985748814,
+          726.1497148135286
+        ],
+        "support": 14744,
+        "score": 13330.122888684273
+      }
+    ],
+    "foul": [],
+    "three_point_arc": [],
+    "free_throw_circle": []
+  },
+  "curve_fits": {
+    "sideline_far": [],
+    "sideline_near": [],
+    "baseline": [],
+    "halfcourt": [],
+    "lane_far": [],
+    "lane_near": [],
+    "foul": [],
+    "three_point_arc": [
+      {
+        "geometry_name": "three_point_arc_left",
+        "conic": [
+          [
+            -2.2576259105743138e-07,
+            -1.3043360340903558e-07,
+            0.00011473563544678116
+          ],
+          [
+            -1.3043360340903558e-07,
+            -2.8055744494941826e-06,
+            0.00182224414537286
+          ],
+          [
+            0.00011473563544678114,
+            0.0018222441453728596,
+            -0.9999966662524735
+          ]
+        ],
+        "circle_center": [
+          525.5462451522084,
+          585.8094420263203
+        ],
+        "circle_radius": 399.6260127102122,
+        "support": 31210,
+        "score": 27689.865163862705
+      }
+    ],
+    "free_throw_circle": [
+      {
+        "geometry_name": "free_throw_circle_left",
+        "conic": [
+          [
+            2.0319867085642237e-07,
+            1.8175837406593293e-09,
+            -0.00014779048826012414
+          ],
+          [
+            1.8175837406593293e-09,
+            2.284663809765031e-06,
+            -0.0014385720817178043
+          ],
+          [
+            -0.00014779048826012416,
+            -0.0014385720817178043,
+            0.99999790866352
+          ]
+        ],
+        "circle_center": [
+          739.9409380834624,
+          608.3109980880611
+        ],
+        "circle_radius": 151.02843166066194,
+        "support": 21977,
+        "score": 19836.891625463963
+      }
+    ]
+  }
+}
