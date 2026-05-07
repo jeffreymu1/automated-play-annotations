@@ -1,0 +1,517 @@
+{
+  "frames": [
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000015.jpg",
+      "homography": [
+        [
+          1.1793667465328332,
+          0.015858298889264863,
+          -1943.2098574091744
+        ],
+        [
+          -0.06911228901413993,
+          0.15266232286927583,
+          578.5254149325872
+        ],
+        [
+          5.399354595282408e-05,
+          -0.0003273084995216634,
+          1.0
+        ]
+      ],
+      "frame_index": 15,
+      "source_name": "caitlin_clark",
+      "score": 0.21716113116397778,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000015_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000017.jpg",
+      "homography": [
+        [
+          1.191529277882439,
+          -0.02345966352562842,
+          -1924.0167656254298
+        ],
+        [
+          -0.06711012953514542,
+          0.1429932593583715,
+          578.7322432873787
+        ],
+        [
+          5.407958369050893e-05,
+          -0.0003438508891026626,
+          1.0
+        ]
+      ],
+      "frame_index": 17,
+      "source_name": "caitlin_clark",
+      "score": 0.22230499344238674,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000017_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000019.jpg",
+      "homography": [
+        [
+          1.253635596659538,
+          0.042261083630539834,
+          -2060.3876096280906
+        ],
+        [
+          -0.07309200830692503,
+          0.16725227139605822,
+          613.5147942275873
+        ],
+        [
+          5.927679305221653e-05,
+          -0.0002999438640137943,
+          1.0
+        ]
+      ],
+      "frame_index": 19,
+      "source_name": "caitlin_clark",
+      "score": 0.25528247474756205,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000019_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000021.jpg",
+      "homography": [
+        [
+          1.2744976118689,
+          0.0674248211670544,
+          -2094.0368739914707
+        ],
+        [
+          -0.07489048657483077,
+          0.18206650136026767,
+          615.3340665929286
+        ],
+        [
+          5.9052590321580284e-05,
+          -0.00028641969246106483,
+          1.0
+        ]
+      ],
+      "frame_index": 21,
+      "source_name": "caitlin_clark",
+      "score": 0.2618730636322754,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000021_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000023.jpg",
+      "homography": [
+        [
+          1.321016028761132,
+          0.0915844533220372,
+          -2144.3343970661667
+        ],
+        [
+          -0.05885964689274091,
+          0.20100740022429783,
+          582.0622751364282
+        ],
+        [
+          6.843826318399983e-05,
+          -0.0002777679290803901,
+          1.0
+        ]
+      ],
+      "frame_index": 23,
+      "source_name": "caitlin_clark",
+      "score": 0.24752983046463173,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000023_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000025.jpg",
+      "homography": [
+        [
+          1.336417639151837,
+          0.07351183666558865,
+          -2123.750672189196
+        ],
+        [
+          -0.05149366239057032,
+          0.19996036403975698,
+          566.5065560579008
+        ],
+        [
+          7.148077804556922e-05,
+          -0.0002835826065741903,
+          1.0
+        ]
+      ],
+      "frame_index": 25,
+      "source_name": "caitlin_clark",
+      "score": 0.24976246351245796,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000025_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000027.jpg",
+      "homography": [
+        [
+          0.7351409240740955,
+          0.3665425156142044,
+          -839.1341606948035
+        ],
+        [
+          -0.10124998219415703,
+          0.29007329177336794,
+          572.9281656633154
+        ],
+        [
+          -2.889773663998591e-05,
+          -9.780761616336846e-05,
+          1.0
+        ]
+      ],
+      "frame_index": 27,
+      "source_name": "caitlin_clark",
+      "score": 0.09622814456298648,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000027_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000029.jpg",
+      "homography": [
+        [
+          1.3399381211347563,
+          -0.0026301561189589527,
+          -1998.224021528212
+        ],
+        [
+          -0.04645785050454419,
+          0.18452225278325918,
+          547.7413411742709
+        ],
+        [
+          6.501962957281929e-05,
+          -0.0002963711598456269,
+          1.0
+        ]
+      ],
+      "frame_index": 29,
+      "source_name": "caitlin_clark",
+      "score": 0.2669480501203247,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000029_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000031.jpg",
+      "homography": [
+        [
+          1.192495818135581,
+          -0.04081130568847623,
+          -1691.2724439780004
+        ],
+        [
+          -0.04911541111711847,
+          0.13924992997064578,
+          522.7940147218596
+        ],
+        [
+          2.6501617952239068e-05,
+          -0.00031469346849925366,
+          1.0
+        ]
+      ],
+      "frame_index": 31,
+      "source_name": "caitlin_clark",
+      "score": 0.1819885563960525,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000031_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000033.jpg",
+      "homography": [
+        [
+          1.3618378833667684,
+          0.00014548876980400574,
+          -1878.061088733055
+        ],
+        [
+          -0.038388212879259254,
+          0.2026757673780162,
+          521.383350647885
+        ],
+        [
+          5.39627751713559e-05,
+          -0.0002645341977573471,
+          1.0
+        ]
+      ],
+      "frame_index": 33,
+      "source_name": "caitlin_clark",
+      "score": 0.22754255317051164,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000033_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000035.jpg",
+      "homography": [
+        [
+          1.2694784506687122,
+          -0.05529120768279289,
+          -1583.770438068231
+        ],
+        [
+          -0.006758303594820773,
+          0.11303057912138545,
+          470.10560913848803
+        ],
+        [
+          4.941386701566362e-05,
+          -0.00034871391206700504,
+          1.0
+        ]
+      ],
+      "frame_index": 35,
+      "source_name": "caitlin_clark",
+      "score": 0.1498416674810677,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000035_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000049.jpg",
+      "homography": [
+        [
+          1.0520697329745172,
+          -0.5133082358424196,
+          6.98729041247671
+        ],
+        [
+          0.047177012597406365,
+          0.06561636114879661,
+          367.0043004246291
+        ],
+        [
+          5.4709307104025094e-06,
+          -0.0003428420591787173,
+          1.0
+        ]
+      ],
+      "frame_index": 49,
+      "source_name": "caitlin_clark",
+      "score": 0.09831970296756345,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000049_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000051.jpg",
+      "homography": [
+        [
+          1.1284835386579,
+          -0.5313012587206067,
+          91.12769142947747
+        ],
+        [
+          0.06781361340743519,
+          0.09581190294157496,
+          346.48047751244616
+        ],
+        [
+          2.036488690700251e-05,
+          -0.0003212376976917775,
+          1.0
+        ]
+      ],
+      "frame_index": 51,
+      "source_name": "caitlin_clark",
+      "score": 0.11623720982718243,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000051_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000053.jpg",
+      "homography": [
+        [
+          1.0332488215286815,
+          -0.42385177320209366,
+          195.57744849615773
+        ],
+        [
+          0.022696721028499314,
+          0.16407866839734034,
+          368.7189593021515
+        ],
+        [
+          -4.92877675905607e-05,
+          -0.0002320319606725097,
+          1.0
+        ]
+      ],
+      "frame_index": 53,
+      "source_name": "caitlin_clark",
+      "score": 0.28060441616150544,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000053_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000055.jpg",
+      "homography": [
+        [
+          1.0526244834830942,
+          -0.46846357952817413,
+          350.8985009690025
+        ],
+        [
+          0.07047332490418917,
+          0.16043212334478582,
+          347.48525408205296
+        ],
+        [
+          1.3467727455820002e-05,
+          -0.00024872663132839825,
+          1.0
+        ]
+      ],
+      "frame_index": 55,
+      "source_name": "caitlin_clark",
+      "score": 0.250452539815475,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000055_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000057.jpg",
+      "homography": [
+        [
+          0.9841231326545355,
+          -0.4728355483133899,
+          454.62102502717767
+        ],
+        [
+          0.052760033220518386,
+          0.12963082564452572,
+          378.9297518969384
+        ],
+        [
+          -2.1195696886019048e-05,
+          -0.0002634238098202748,
+          1.0
+        ]
+      ],
+      "frame_index": 57,
+      "source_name": "caitlin_clark",
+      "score": 0.288602662040564,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000057_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000059.jpg",
+      "homography": [
+        [
+          0.9813025028374986,
+          -0.5136123665891426,
+          558.3416157581968
+        ],
+        [
+          0.06891204708835581,
+          0.15091961186005678,
+          398.55272681807566
+        ],
+        [
+          -1.9829496522131583e-05,
+          -0.00023492888160995387,
+          1.0
+        ]
+      ],
+      "frame_index": 59,
+      "source_name": "caitlin_clark",
+      "score": 0.24819460039135405,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000059_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000061.jpg",
+      "homography": [
+        [
+          0.958891240129421,
+          -0.5259448366998162,
+          625.834532180417
+        ],
+        [
+          0.07433467834667591,
+          0.13703624000509057,
+          418.929011070048
+        ],
+        [
+          -1.480631196683019e-05,
+          -0.00024234672347428287,
+          1.0
+        ]
+      ],
+      "frame_index": 61,
+      "source_name": "caitlin_clark",
+      "score": 0.2469885982574707,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000061_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000063.jpg",
+      "homography": [
+        [
+          0.9638682465026678,
+          -0.5287713464858652,
+          669.8712432454321
+        ],
+        [
+          0.060687722348768534,
+          0.12313889359792898,
+          439.5108127136078
+        ],
+        [
+          -3.118459196015569e-05,
+          -0.0002473682621726808,
+          1.0
+        ]
+      ],
+      "frame_index": 63,
+      "source_name": "caitlin_clark",
+      "score": 0.287327100444283,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000063_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000065.jpg",
+      "homography": [
+        [
+          0.953436879080444,
+          -0.5380004987736285,
+          705.6973180921298
+        ],
+        [
+          0.054678696181060596,
+          0.11463794043717962,
+          449.661659864502
+        ],
+        [
+          -3.891127493634773e-05,
+          -0.0002515515441163212,
+          1.0
+        ]
+      ],
+      "frame_index": 65,
+      "source_name": "caitlin_clark",
+      "score": 0.27484805206522206,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000065_refinement.json"
+    },
+    {
+      "image_path": "test_footage/caitlin_clark/frames/frame_000067.jpg",
+      "homography": [
+        [
+          0.9601846775033871,
+          -0.5489789683809226,
+          735.2326889761072
+        ],
+        [
+          0.05536175512083893,
+          0.11693400860622218,
+          452.88223125592594
+        ],
+        [
+          -4.118521485677897e-05,
+          -0.0002493889172041522,
+          1.0
+        ]
+      ],
+      "frame_index": 67,
+      "source_name": "caitlin_clark",
+      "score": 0.26540528880661146,
+      "refinement_json": "tests/output/0005_marking_refinement_halfcourt_tangent_guides/frame_000067_refinement.json"
+    }
+  ],
+  "skipped_score_nonfinite": [
+    "frame_000037_refinement.json",
+    "frame_000039_refinement.json",
+    "frame_000041_refinement.json",
+    "frame_000043_refinement.json",
+    "frame_000045_refinement.json",
+    "frame_000047_refinement.json"
+  ],
+  "missing_images": []
+}

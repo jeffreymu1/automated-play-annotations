@@ -15,7 +15,7 @@ models/*.onnx
 /data/
 
 # Results
-results/*
+# results/*
 !results/.gitkeep
 
 runs/
