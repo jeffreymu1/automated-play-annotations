@@ -14,10 +14,6 @@ models/*.pth
 models/*.onnx
 /data/
 
-# Results
-# results/*
-!results/.gitkeep
-
 runs/
 *.pt
 
